@@ -12,8 +12,10 @@ Il faudra pour cette branche
 
 ## Installation
 
+- Mettre une star ⭐
 - Télécharger les fichiers
 - Installer les packages en faisant `npm i`
+- Mettez votre token dans config.json
 - Executer `node shards` pour lancer le bot
 
 ## Crédits
