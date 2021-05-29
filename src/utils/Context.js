@@ -46,7 +46,11 @@ class Context {
     }
 
     send (content) {
-        return this.channel.send(content);
+        return this.channel.send(content); // for embed or file or simple message
+    }
+
+    sendRichMessage (content,data) {
+        return this.channel.send(content,data); // for simple message plus embed plus/or file
     }
 }
 
