@@ -15,6 +15,14 @@ class Context {
         this.args = args;
         this.prefix = client.prefix;
         this.lang = client.config.mainLang;
+        if(this.client?.shard){
+            this.shard = this.client.shard
+        }
+    }
+    
+    get shards(){
+        if(!this.shard) throw new Error('Shard non trouvable')
+        return this.shard
     }
 
     get guild () {
