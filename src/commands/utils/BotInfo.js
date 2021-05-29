@@ -17,8 +17,8 @@ class Botinfo extends Command {
     async run(ctx){
 
         const [guilds, users] = await Promise.all([
-            ctx.client.shard.fetchClientValues("guilds.cache.size"),
-            ctx.client.shard.fetchClientValues("users.cache.size")
+            ctx.shard.fetchClientValues("guilds.cache.size"),
+            ctx.shard.fetchClientValues("users.cache.size")
         ]);
 
         ctx.send({
@@ -45,7 +45,7 @@ class Botinfo extends Command {
                     },
                     {
                         name: "Shards",
-                        value: "`" + ctx.client.shard.count + "`",
+                        value: "`" + ctx.shard.count + "`",
                         inline: true
                     },
                     {
