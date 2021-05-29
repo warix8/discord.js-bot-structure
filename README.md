@@ -21,4 +21,4 @@ Il faudra pour cette branche
 ## Crédits
 
 - Ca serait sympathique de votre par de mettre sur une commande (botinfo/crédits/help) que vous utiliser cette structure
-- Cette structure a été faites par Warix est en partie par Ota
+- Cette structure a été faites par Ota est en partie par Warix
