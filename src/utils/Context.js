@@ -9,11 +9,10 @@ ctx.member; utile non ?
 remplacer aussi ctx.message.channel.send() par ctx.send(); !
 */
 class Context {
-    constructor(client, message, args) {
-        this.message = message;
+    constructor(client, interaction) {
+        this.interaction = interaction;
         this.client = client;
-        this.args = args;
-        this.prefix = client.prefix;
+        this.args = interaction.options;
         this.lang = client.config.mainLang;
         if(this.client?.shard){
             this.shard = this.client.shard
@@ -26,32 +25,36 @@ class Context {
     }
 
     get guild () {
-        return this.message.guild;
+        return this.interaction.guild;
     }
 
     get channel () {
-        return this.message.channel;
+        return this.interaction.channel;
     }
 
     get author () {
-        return this.message.author;
+        return this.interaction.user;
     }
 
     get member () {
-        return this.guild.members.cache.get(this.author.id);
+        return this.interaction.member;
     }
 
     get me () {
         return (this.guild ? this.guild.members.cache.get(this.client.user.id) : undefined);
     }
 
-    send (content) {
-        return this.channel.send(content); // for embed or file or simple message
+    reply (...content) {
+        return this.interaction.reply(...content); // for embed or file or simple message
+    }
+    
+    defer (...args) {
+        this.interaction.defer(...args);
     }
 
-    sendRichMessage (content,data) {
+    /*sendRichMessage (content,data) {
         return this.channel.send(content,data); // for simple message plus embed plus/or file
-    }
+    }*/
 }
 
 module.exports = Context;

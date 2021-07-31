@@ -16,11 +16,13 @@
     "url": "https://github.com/warix8/discord.js-bot-structure/issues"
   },
   "homepage": "https://github.com/warix8/discord.js-bot-structure#readme",
-  "contributors": ["Warix", "Ota"],
+  "contributors": [
+    "Warix",
+    "Ota"
+  ],
   "dependencies": {
     "asciiart-logo": "^0.2.6",
-    "chalk": "^4.1.0",
-    "discord.js": "^12.5.1",
+    "discord.js": "^13.0.0-dev.t1627732975.331a9d3",
     "humanize-duration": "https://github.com/TamakiBot/Logia-humanize-duration",
     "moment": "^2.29.1"
   }

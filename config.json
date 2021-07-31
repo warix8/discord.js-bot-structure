@@ -1,7 +1,8 @@
 {
     "bot": {
-        "token": "",
-        "owernIDs": []
+        "token": "BOT_TOKEN",
+        "ownersIDs": ["OWNER_ID"]
     },
-    "mainLang": "fr"
+    "mainLang": "fr",
+    "testGuild": "GUILD_ID"
 }

@@ -8,9 +8,9 @@ class Botinfo extends Command {
         super({
             name: 'botinfo',
             category: 'utils',
-            description: 'This command is used to config the bye system of this server',
-            usage: ['botinfo'], //optionnel si rien fourni le bot prend par défaut le nom de la commande
-            aliases: ['bi']
+            description: 'Displays the bot informations.',
+            options: [],
+            testCmd: true
         })
     }
 
@@ -21,8 +21,8 @@ class Botinfo extends Command {
             ctx.shards.fetchClientValues("users.cache.size")
         ]);
 
-        ctx.send({
-            embed: {
+        ctx.reply({
+            embeds: [{
                 thumbnail: {
                     url: ctx.client.user.displayAvatarURL({ size: 512, dynamic: true })
                 },
@@ -59,7 +59,7 @@ class Botinfo extends Command {
                     }
 
                 ]
-            }
+            }]
         })
 
     }

@@ -13,14 +13,15 @@ module.exports = class Command {
         this.name = info.name;
         this.category = info.category;
         this.description = info.description;
-        this.usage = info.usage || [info.name];
+        this.options = info.options || [];
         this.example = info.example || [];
-        this.aliases = info.aliases || [];
 
         this.userPerms = info.userPerms || [];
         this.botPerms = info.botPerms || [];
-        this.disabled = false;
-        this.ownerOnly = false;
+        this.disabled = info.disabled || false;
+        this.ownerOnly = info.ownerOnly || false;
+        this.guildOnly = info.guildOnly || false;
+        this.testCmd = info.testCmd || false;
         //this.cooldown = info.cooldown || 0; Si vous voulez faire votre système de cooldown ;)
     }
 

@@ -6,18 +6,16 @@ const CommandService = require("../services/CommandService");
 L'évent messsage n'est pas lon car en faites les tâches sont répartis dans le dossier services prenez exemple sur CommandService ;)
 */
 
-class Message {
+class InteractionCreate {
     constructor(client) {
         this.client = client;
-        this.name = "message";
+        this.name = "interactionCreate";
         this.commands = new CommandService(this.client);
     }
 
-    async run (message) {
-        if (message.author.bot || !message.channel.guild) return;
-
-        await this.commands.handle(message);
+    async run (interaction) {
+        await this.commands.handle(interaction);
     }
 }
 
-module.exports = Message;
+module.exports = InteractionCreate;
