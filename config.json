@@ -1,8 +1,8 @@
 {
     "bot": {
-        "token": "NzE3NzE2Mzk3OTI0Mjg2NTc0.XteXew.RJYFr94m3o-Hi6nA9FFnZ2c-Tek",
+        "token": "BOT_TOKEN",
         "ownersIDs": ["OWNER_ID"]
     },
     "mainLang": "fr",
-    "testGuild": "786321068045500418"
+    "testGuild": "TESTGUILDID"
 }
