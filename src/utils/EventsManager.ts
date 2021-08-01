@@ -1,24 +1,31 @@
-'use strict';
+"use strict";
 
-//ici on gère nos events pour les charger etc.
+import type Client from "../../main";
+import { Collection } from "discord.js";
+import { resolve } from "path";
+import type DiscordEvent from "./DiscordEvent";
 
-const { resolve } = require("path");
-const { Collection } = require("discord.js");
-const { access, readdir, stat } = require("fs/promises");
+// ici on gère nos events pour les charger etc.
+
+import { access, readdir, stat } from "fs/promises";
 
 class EventsManager {
-    constructor(client) {
+    private _client: typeof Client;
+    private _events: Collection<string, DiscordEvent>;
+    private _path: string;
+
+    constructor(client: typeof Client) {
         this._client = client;
         this._events = new Collection();
         // eslint-disable-next-line no-undef
         this._path = resolve(__dirname, "..", "events");
     }
 
-    get events() {
+    get events(): Collection<string, DiscordEvent> {
         return this._events;
     }
 
-    addEvent(event) {
+    addEvent(event: DiscordEvent) {
         this._events.set(event.name.toLowerCase(), event);
         this._client.on(event.name, event.run.bind(event));
         delete require.cache[require.resolve(this._path + "\\" + event.name)];
@@ -30,7 +37,7 @@ class EventsManager {
         } catch (error) { return; }
 
         const events = await readdir(this._path);
-        
+
         if (events && events.length > 0) {
             for (const event of events) {
                 const path = resolve(this._path, event);
@@ -44,4 +51,4 @@ class EventsManager {
     }
 }
 
-module.exports = EventsManager;
+export default EventsManager;

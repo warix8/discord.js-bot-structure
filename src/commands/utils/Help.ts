@@ -1,27 +1,29 @@
-'use strict';
+"use strict";
 
-const Command = require('../../utils/Command.js');
+
+import type Context from "../../utils/Context";
+import Command from "../../utils/Command.js";
 
 class Help extends Command {
     constructor() {
         super({
-            name: 'help',
-            category: 'utils',
-            description: 'Display all the commands of the bot',
+            name: "help",
+            category: "utils",
+            description: "Display all the commands of the bot",
             options: [{
                 type: "STRING",
                 name: "command",
                 description: "Get the help of this command",
                 required: false,
             }],
-            example: ['help', 'help botinfo'],
-        })
+            examples: ["help", "help botinfo"],
+        });
     }
 
-    async run(ctx){
+    async run(ctx: Context) {
 
-        if(ctx.args.getString("command")){
-            const command = ctx.client.commands.findCommand(ctx.args.getString("command").toLowerCase());
+        if (ctx.args.getString("command")) {
+            const command: Command | undefined = ctx.client.commands.findCommand(ctx.args?.getString("command")?.toLowerCase());
             if (!command) return ctx.reply(`The command \`${ctx.args.getString("command")}\` doesn't exist.`);
 
             return ctx.reply({
@@ -30,17 +32,17 @@ class Help extends Command {
                     description: command.description,
                     fields: [
                         {
-                            name: "Usage",
-                            value: command.options.map((x) => `\`${x.required ? "(" : "<"}${x.name}:${x.type.toLowerCase()}${x.required ? ")" : ">"}\``).join("\n"),
+                            name: "Options",
+                            value: command.options.length > 0
+                                ? command.options.map((x) => `\`${x.required ? "(" : "<"}${x.name}:${x.type.toString().toLowerCase()}${x.required ? ")" : ">"}\``).join("\n")
+                                : "No options",
                             inline: true
                         },
                         {
                             name: "Examples",
-                            value: command.examples ? command.examples.map((x) => "`" + x + "`").join("\n") : "No examples",
-                            inline: true
-                        },{
-                            name: "Aliases",
-                            value: command.aliases ? command.aliases.map((x) => "`" + x + "`").join("\n") : "No aliases",
+                            value: command.examples.length > 0
+                                ? command.examples.map((x) => "`" + x + "`").join("\n")
+                                : "No examples",
                             inline: true
                         }
                     ]
@@ -48,9 +50,9 @@ class Help extends Command {
             });
         }
 
-        const category = [];
+        const category: string[] = [];
 
-        ctx.client.commands.commands.each((command) => {
+        ctx.client.commands.commands.each((command: Command) => {
             if (!category.includes(command.category) && !command.disabled) {
                 category.push(command.category);
             }
@@ -66,7 +68,7 @@ class Help extends Command {
                 fields: category.map(x => {
                     return {
                         name: x,
-                        value: ctx.client.commands.commands.filter(cmd => cmd.category === x && !cmd.cmdTest).map(cmd => `\`${cmd.name}\``).join(", ")
+                        value: ctx.client.commands.commands.filter((cmd: Command) => cmd.category === x && !cmd.testCmd).map((cmd: Command) => `\`${cmd.name}\``).join(", ")
                     };
                 }),
                 timestamp: new Date(),
@@ -75,10 +77,10 @@ class Help extends Command {
                     iconURL: ctx.client.user.avatarURL()
                 }
             }]
-        })
+        });
 
     }
 
 }
 
-module.exports = new Help;
+module.exports = new Help();

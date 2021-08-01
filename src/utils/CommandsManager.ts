@@ -1,30 +1,36 @@
-'use strict';
+"use strict";
 
-//ici on gère nos commandes pour les charger ou en trouver une avec la fonction findCommand pour une command help
+// ici on gère nos commandes pour les charger ou en trouver une avec la fonction findCommand pour une command help
 
-const { resolve } = require("path");
-const { Collection, GuildApplicationCommandManager } = require("discord.js");
-const { access, readdir, stat } = require("fs/promises");
+import Client from "../../main";
+import { resolve } from "path";
+import { Collection, ApplicationCommandManager } from "discord.js";
+import { access, readdir, stat } from "fs/promises";
+import Command from "./Command";
 
 class CommandsManager {
-    constructor(client) {
+    private _client: typeof Client;
+    private _commands: Collection<string, Command>;
+    private _path: string;
+    private _globalCommands: ApplicationCommandManager;
+    constructor(client: typeof Client) {
         this._client = client;
         this._commands = new Collection();
-        // eslint-disable-next-line no-undef
         this._path = resolve(__dirname, "..", "commands");
-        this._globalCommands = client.application.commands;
+        if(!this._client.application) throw new Error("Appication is null");
+        this._globalCommands = this._client.application.commands;
     }
 
     get commands() {
         return this._commands;
     }
 
-    addCommand(command) {
+    addCommand(command: Command) {
         this._commands.set(command.name.toLowerCase(), command);
     }
 
-    findCommand(name) {
-        if (!name || typeof name !== "string") return null;
+    findCommand(name: string) {
+        if (!name || typeof name !== "string") return undefined;
         return this._commands.find((cmd) => {
             return cmd.name.toLowerCase() === name.toLowerCase();
         });
@@ -62,21 +68,22 @@ class CommandsManager {
             }
         }
 
-        await this._globalCommands.set(this._commands.filter(cmd => cmd.testCmd).map((cmd) => { 
+        await this._globalCommands.set(this._commands.filter(cmd => cmd.testCmd).map((cmd) => {
             return {
                 name: cmd.name,
                 description: cmd.description,
                 options: cmd.options
-        }}), this._client.config.testGuild)
+            };
+        }), this._client.config.testGuild);
 
-        await this._globalCommands.set(this._commands.filter(cmd => !cmd.testCmd).map((cmd) => { 
+        await this._globalCommands.set(this._commands.filter(cmd => !cmd.testCmd).map((cmd) => {
             return {
                 name: cmd.name,
                 description: cmd.description,
                 options: cmd.options
-        }}))
+        };}));
 
     }
 }
 
-module.exports = CommandsManager;
+export default CommandsManager;

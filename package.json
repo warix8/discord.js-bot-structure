@@ -2,9 +2,12 @@
   "name": "discord.js-bot-structure",
   "version": "1.0.0",
   "description": "An basic discord.js-bot-structure",
-  "main": "main.js",
+  "main": "main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc",
+    "watch": "tsc --watch",
+    "start": "node dist/shards.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,10 @@
   "dependencies": {
     "asciiart-logo": "^0.2.6",
     "discord.js": "^13.0.0-dev.t1627732975.331a9d3",
-    "humanize-duration": "https://github.com/TamakiBot/Logia-humanize-duration",
-    "moment": "^2.29.1"
+    "humanize-duration": "https://github.com/TamakiBot/Logia-humanize-duration"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.10",
+    "tslint": "^6.1.3"
   }
 }

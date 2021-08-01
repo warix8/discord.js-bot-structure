@@ -2,3 +2,5 @@ node_modules/
 npm/
 package-lock.json
 yarn.lock
+dist/
+yarn-error.log

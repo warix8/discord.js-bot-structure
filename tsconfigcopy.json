@@ -1,0 +1,18 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "outDir": "dist",
+        "target": "ES6",
+        "module": "CommonJS",
+        "declaration": true,
+        "strict": true,
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "strictNullChecks": false,
+        "noEmitOnError": true,
+        "noImplicitAny": true
+    },
+    "include": [
+        "root/**/*"
+    ]
+}

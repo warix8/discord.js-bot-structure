@@ -1,23 +1,29 @@
-'use strict';
+"use strict";
 
-const humanizeDuration = require("humanize-duration");
-const Command = require('../../utils/Command.js');
+
+import { Collection } from "discord.js";
+// @ts-ignore
+import humanizeDuration = require("humanize-duration");
+import Command from "../../utils/Command";
+import Context from "../../utils/Context";
 
 class Botinfo extends Command {
     constructor() {
         super({
-            name: 'botinfo',
-            category: 'utils',
-            description: 'Displays the bot informations.',
+            name: "botinfo",
+            category: "utils",
+            description: "Displays the bot informations.",
             options: [],
             testCmd: true
-        })
+        });
     }
 
-    async run(ctx){
+    async run(ctx: Context){
 
-        const [guilds, users] = await Promise.all([
+        const [guilds, users] = await Promise.all<Collection<any, number>, Collection<any, number>>([
+            // @ts-ignore
             ctx.shards.fetchClientValues("guilds.cache.size"),
+            // @ts-ignore
             ctx.shards.fetchClientValues("users.cache.size")
         ]);
 
@@ -31,6 +37,7 @@ class Botinfo extends Command {
                     {
                         name: "Serveurs",
                         value: "`" + guilds.reduce((acc, count) => acc + count, 0) + "`",
+                        // value: "`" + guilds.reduce((acc, guild) => acc + count, 0) + "`",
                         inline: true
                     },
                     {
@@ -45,7 +52,7 @@ class Botinfo extends Command {
                     },
                     {
                         name: "Shards",
-                        value: "`" + ctx.shard.count + "`",
+                        value: "`" + ctx.shards.count + "`",
                         inline: true
                     },
                     {
@@ -60,10 +67,10 @@ class Botinfo extends Command {
 
                 ]
             }]
-        })
+        });
 
     }
 
 }
 
-module.exports = new Botinfo;
+module.exports = new Botinfo();
