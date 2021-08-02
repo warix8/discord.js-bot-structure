@@ -2,7 +2,7 @@
 
 import { ShardingManager } from "discord.js";
 // @ts-ignore
-import logo from "asciiart-logo";
+import * as logo from "asciiart-logo";
 import Logger from "./src/utils/Logger";
 import { bot } from "./config.json";
 import * as botPackage from "./package.json";
