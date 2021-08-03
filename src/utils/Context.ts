@@ -1,7 +1,7 @@
 "use strict";
 
 import type { CommandInteraction, CommandInteractionOptionResolver, Guild, ShardClientUtil, TextChannel,
-    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload, InteractionDeferOptions
+    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload, InteractionDeferOptions, WebhookEditMessageOptions
 } from "discord.js";
 import Client from "../../main";
 
@@ -65,7 +65,7 @@ class Context {
         return this.interaction.followUp(content);
     }
 
-    editReply (content: string | MessagePayload | InteractionReplyOptions) {
+    editReply (content: string | MessagePayload | WebhookEditMessageOptions) {
         return this.interaction.editReply(content);
     }
 
