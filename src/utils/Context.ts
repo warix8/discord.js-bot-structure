@@ -70,7 +70,7 @@ class Context {
         return this.interaction.editReply(content);
     }
 
-     deleteReply (): Promise<void> {
+    deleteReply (): Promise<void> {
         return this.interaction.deleteReply();
     }
 
