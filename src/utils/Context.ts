@@ -1,8 +1,9 @@
 "use strict";
 
-import { CommandInteraction, CommandInteractionOptionResolver, Guild, ShardClientUtil, TextChannel,
-    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload, InteractionDeferOptions, GuildChannel
+import type { CommandInteraction, CommandInteractionOptionResolver, Guild, ShardClientUtil, TextChannel,
+    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload, InteractionDeferOptions, WebhookEditMessageOptions
 } from "discord.js";
+import { GuildChannel } from "discord.js";
 import Client from "../../main";
 
 /*
@@ -59,6 +60,18 @@ class Context {
 
     defer (options?: InteractionDeferOptions) {
         this.interaction.defer(options);
+    }
+
+    followUp (content: string | MessagePayload | InteractionReplyOptions) {
+        return this.interaction.followUp(content);
+    }
+
+    editReply (content: string | MessagePayload | WebhookEditMessageOptions) {
+        return this.interaction.editReply(content);
+    }
+
+     deleteReply (): Promise<void> {
+        return this.interaction.deleteReply();
     }
 
     /*sendRichMessage (content,data) {
