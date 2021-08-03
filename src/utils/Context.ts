@@ -37,7 +37,8 @@ class Context {
 
     get channel (): TextChannel | NewsChannel | ThreadChannel {
         if(!this.interaction.channel || !this.interaction.guild) throw new Error("Not a guild channel");
-        if(!(this.interaction.channel instanceof TextBasedChannel(GuildChannel))) throw new Error("This is not a GuildTextChannel");
+        if(!(this.interaction.channel instanceof GuildChannel) &&
+        !(this.interaction.channel instanceof ThreadChannel)) throw new Error("This is not a GuildTextChannel");
         return this.interaction.channel;
     }
 
