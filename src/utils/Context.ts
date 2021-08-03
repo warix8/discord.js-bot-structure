@@ -69,8 +69,8 @@ class Context {
         return this.interaction.editReply(content);
     }
 
-    deleteReply (): void {
-        this.interaction.deleteReply();
+     deleteReply (): Promise<void> {
+        return this.interaction.deleteReply();
     }
 
     /*sendRichMessage (content,data) {
