@@ -1,7 +1,7 @@
 "use strict";
 
 import type Client from "../../main";
-import { CommandInteraction, GuildChannel, Permissions } from "discord.js";
+import { CommandInteraction, GuildChannel, Permissions, TextBasedChannel } from "discord.js";
 import Context from "../utils/Context";
 
 class CommandService {
@@ -16,7 +16,7 @@ class CommandService {
         const guild = interaction.guild;
 
         // Est ce que le bot peut parler ?
-        if(!(interaction.channel instanceof GuildChannel)) throw new Error("This is not a GuildTextChannel");
+        if(!(interaction.channel instanceof TextBasedChannel(GuildChannel))) throw new Error("This is not a GuildTextChannel");
         const channelBotPerms = new Permissions(interaction.channel?.permissionsFor(guild.me));
 
         // if (!me.hasPermission("SEND_MESSAGES") || !channelBotPerms.has("SEND_MESSAGES")) return;
