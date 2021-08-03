@@ -25,7 +25,7 @@
   ],
   "dependencies": {
     "asciiart-logo": "^0.2.6",
-    "discord.js": "^13.0.0-dev.t1627732975.331a9d3",
+    "discord.js": "^13.0.0-dev.t1627862659.e2e4f65",
     "humanize-duration": "https://github.com/TamakiBot/Logia-humanize-duration"
   },
   "devDependencies": {

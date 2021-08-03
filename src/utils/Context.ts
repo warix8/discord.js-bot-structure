@@ -1,7 +1,7 @@
 "use strict";
 
-import type { CommandInteraction, CommandInteractionOptionResolver, Guild, ShardClientUtil, TextChannel,
-    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload, InteractionDeferOptions
+import { CommandInteraction, CommandInteractionOptionResolver, Guild, ShardClientUtil, TextChannel,
+    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload, InteractionDeferOptions, GuildChannel
 } from "discord.js";
 import Client from "../../main";
 
@@ -37,7 +37,7 @@ class Context {
 
     get channel (): TextChannel | NewsChannel | ThreadChannel {
         if(!this.interaction.channel || !this.interaction.guild) throw new Error("Not a guild channel");
-        // @ts-ignore
+        if(!(this.interaction.channel instanceof GuildChannel)) throw new Error("This is not a GuildTextChannel");
         return this.interaction.channel;
     }
 
@@ -49,8 +49,8 @@ class Context {
         return this.interaction.member;
     }
 
-    get me (): GuildMember | null {
-        return this.guild?.members.cache.get(this.client.user?.id) ?? null;
+    get me (): GuildMember {
+        return this.guild.me;
     }
 
     reply (content: string | MessagePayload | InteractionReplyOptions) {

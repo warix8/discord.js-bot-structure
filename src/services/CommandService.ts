@@ -1,7 +1,7 @@
 "use strict";
 
 import type Client from "../../main";
-import { CommandInteraction, Permissions } from "discord.js";
+import { CommandInteraction, GuildChannel, Permissions } from "discord.js";
 import Context from "../utils/Context";
 
 class CommandService {
@@ -14,12 +14,10 @@ class CommandService {
         if (interaction.user.bot || !interaction.inGuild()) return;
 
         const guild = interaction.guild;
-        // @ts-ignore
-        const me = guild.members.cache.get(this.client.user.id);
 
         // Est ce que le bot peut parler ?
-        // @ts-ignore
-        const channelBotPerms = new Permissions(interaction.channel?.permissionsFor(me));
+        if(!(interaction.channel instanceof GuildChannel)) throw new Error("This is not a GuildTextChannel");
+        const channelBotPerms = new Permissions(interaction.channel?.permissionsFor(guild.me));
 
         // if (!me.hasPermission("SEND_MESSAGES") || !channelBotPerms.has("SEND_MESSAGES")) return;
 
@@ -52,10 +50,10 @@ class CommandService {
             return interaction.reply(`You must have \`${command.userPerms.join("`, `")}\` permissions to execute this command.`);
         }
 
-        if (!me.permissions.has("EMBED_LINKS") || !channelBotPerms.has("EMBED_LINKS")) return interaction.reply("The bot must have the `EMBED_LINKS` permissions to work properly !");
+        if (!guild.me.permissions.has("EMBED_LINKS") || !channelBotPerms.has("EMBED_LINKS")) return interaction.reply("The bot must have the `EMBED_LINKS` permissions to work properly !");
 
         // Si le bot manques de permissions
-        if (command.botPerms.length > 0 && !command.botPerms.every(p => me.permissions.has(p) && channelBotPerms.has(p))) {
+        if (command.botPerms.length > 0 && !command.botPerms.every(p => guild.me.permissions.has(p) && channelBotPerms.has(p))) {
             return interaction.reply(`The bot must have \`${command.botPerms.join("`, `")}\` permissions to execute this command.`);
         }
 
