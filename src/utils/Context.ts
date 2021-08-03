@@ -60,6 +60,18 @@ class Context {
     defer (options?: InteractionDeferOptions) {
         this.interaction.defer(options);
     }
+    
+    followUp (content: string | MessagePayload | InteractionReplyOptions) {
+        return this.interaction.followUp(content);
+    }
+
+    editReply (content: string | MessagePayload | InteractionReplyOptions) {
+        return this.interaction.editReply(content);
+    }
+
+    deleteReply (): void {
+        this.interaction.deleteReply();
+    }
 
     /*sendRichMessage (content,data) {
         return this.channel.send(content,data); // for simple message plus embed plus/or file
