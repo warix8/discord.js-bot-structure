@@ -11,10 +11,6 @@ abstract class DiscordEvent {
         this.name = name;
     }
 
-    /*static bootstrap (client: typeof Client) {
-        throw new Error(`You must create a bootstrap method into your ${this.name} event class`);
-    }*/
-
     abstract run (...args: any[]) : void;
 
 }

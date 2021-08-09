@@ -1,7 +1,8 @@
 "use strict";
 
 import { CommandInteraction, CommandInteractionOptionResolver, Guild, ShardClientUtil, TextChannel,
-    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload, InteractionDeferOptions, WebhookEditMessageOptions, TextBasedChannel, GuildChannel
+    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload,
+    InteractionDeferReplyOptions, WebhookEditMessageOptions, TextBasedChannel, GuildChannel
 } from "discord.js";
 import Client from "../../main";
 
@@ -58,8 +59,8 @@ class Context {
         return this.interaction.reply(content); // for embed or file or simple message
     }
 
-    defer (options?: InteractionDeferOptions) {
-        this.interaction.defer(options);
+    deferReply (options?: InteractionDeferReplyOptions) {
+        this.interaction.deferReply(options);
     }
 
     followUp (content: string | MessagePayload | InteractionReplyOptions) {
@@ -73,10 +74,6 @@ class Context {
     deleteReply (): Promise<void> {
         return this.interaction.deleteReply();
     }
-
-    /*sendRichMessage (content,data) {
-        return this.channel.send(content,data); // for simple message plus embed plus/or file
-    }*/
 }
 
 export default Context;

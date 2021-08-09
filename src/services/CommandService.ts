@@ -22,21 +22,6 @@ class CommandService {
 
         // if (!me.hasPermission("SEND_MESSAGES") || !channelBotPerms.has("SEND_MESSAGES")) return;
 
-        /*//Si on mentionne le bot il donne le prefix
-        const mention = message.content.startsWith(`${"<@!" || "<@"}${this.client.user.id}>`);
-        if (mention) return message.channel.send(`My prefix is \`${this.client.prefix}\` on this server.`);
-
-        //On attaque la partie si c'est une commande donc si ca commence bien par le préfix
-        if (!message.content.startsWith(this.client.prefix)) return;
-
-        //On récupère les arguments on retire le préfix et crée un tableau en séparant chaque mots
-        const args = message.content.slice(this.client.prefix.length).split(/ +/g);
-        //On récupère la commande donc le premier mot args.shift() et on check sur le commandManager
-        const command = this.client.commands.findCommand(args.shift());
-
-        //Si il y en a pas on fait rien
-        if (!command) return;*/
-
         const command = this.client.commands.findCommand(interaction.commandName);
 
         if(!command) return;

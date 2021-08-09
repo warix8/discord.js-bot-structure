@@ -7,7 +7,7 @@ import CommandService from "../services/CommandService";
 import DiscordEvent from "../utils/DiscordEvent";
 
 /*
-L'évent messsage n'est pas lon car en faites les tâches sont répartis dans le dossier services prenez exemple sur CommandService ;)
+L'évent interactionCreate n'est pas long car en faites les tâches sont répartis dans le dossier services prenez exemple sur CommandService ;)
 */
 
 class InteractionCreate extends DiscordEvent {

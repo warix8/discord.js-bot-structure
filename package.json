@@ -23,9 +23,10 @@
     "Warix",
     "Ota"
   ],
+  "node": ">=16.6.0",
   "dependencies": {
     "asciiart-logo": "^0.2.6",
-    "discord.js": "^13.0.0-dev.t1627862659.e2e4f65",
+    "discord.js": "^13.0.1",
     "humanize-duration": "https://github.com/TamakiBot/Logia-humanize-duration"
   },
   "devDependencies": {

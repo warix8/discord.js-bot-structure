@@ -29,20 +29,6 @@ class Bot extends Client {
                         getComparisonTimestamp: e => e?.editedTimestamp ?? e?.createdTimestamp,
                     })
                 },
-                /*UserManager: {
-                    sweepInterval: 300,
-                    sweepFilter: LimitedCollection.filterByLifetime({
-                        lifetime: 1800,
-                        getComparisonTimestamp: e => e?.createdTimestamp,
-                    })
-                },*/
-                ChannelManager: {
-                    sweepInterval: 3600,
-                    sweepFilter: LimitedCollection.filterByLifetime({
-                        lifetime: 900,
-                        getComparisonTimestamp: e => e.isText() ? e.lastMessage?.createdTimestamp ?? 0 : e instanceof VoiceChannel && e.members.size === 0 ? 0 : Date.now()
-                    }),
-                },
                 ThreadManager: {
                     sweepInterval: 3600,
                     sweepFilter: LimitedCollection.filterByLifetime({
