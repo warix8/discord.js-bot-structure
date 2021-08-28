@@ -3,6 +3,7 @@
 // On récupère des classes ici
 import { Client, Intents, Options, LimitedCollection, VoiceChannel } from "discord.js";
 import CommandsManager from "./src/utils/CommandsManager";
+import ClassicCommandsManager from "./src/utils/ClassicCommandsManager";
 import EventsManager from "./src/utils/EventsManager.js";
 import Logger from "./src/utils/Logger";
 import * as config from "./config.json";
@@ -13,6 +14,7 @@ class Bot extends Client {
     logger: Logger;
     events: EventsManager;
     commands!: CommandsManager;
+    classic_commands!: ClassicCommandsManager;
 
     constructor() {
         // On passe les options à la classe Client : https://discord.js.org/#/docs/main/stable/class/Client
@@ -47,13 +49,22 @@ class Bot extends Client {
         this.launch().then(() => {
 
             this.commands = new CommandsManager(this);
-            // On load nos commandes
+            // On load nos slash commandes
             this.commands.loadCommands().then(() => {
                 this.logger.success(`[Commands] Loaded ${this.commands?.commands.size} commands`);
-                this.logger.success("All was successfuly launched");
             }).catch((error) => {
                 this.logger.error(`[CommandLoadError] An error occured when loading commands ${error}`, error.stack);
             });
+
+            this.classic_commands = new ClassicCommandsManager(this);
+            // On load nos commandes classiques
+            this.classic_commands.loadCommands().then(() => {
+                this.logger.success(`[Classic Commands] Loaded ${this.commands?.commands.size} commands`);
+                this.logger.success("All was successfuly launched");
+            }).catch((error) => {
+                this.logger.error(`[ClassicCommandLoadError] An error occured when loading commands ${error}`, error.stack);
+            });
+
 
         }).catch(error => {
             this.logger.error(`[LaunchError] An error occured at startup ${error}`, error.stack);

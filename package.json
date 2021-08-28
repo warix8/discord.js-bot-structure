@@ -27,7 +27,8 @@
   "dependencies": {
     "asciiart-logo": "^0.2.6",
     "discord.js": "^13.0.1",
-    "humanize-duration": "https://github.com/TamakiBot/Logia-humanize-duration"
+    "humanize-duration": "https://github.com/TamakiBot/Logia-humanize-duration",
+    "typescript": "^4.4.2"
   },
   "devDependencies": {
     "@types/node": "^16.4.10",

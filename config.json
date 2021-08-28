@@ -1,8 +1,9 @@
 {
     "bot": {
-        "token": "",
+        "token": "TOKEN",
         "ownersIDs": ["OWNER_ID"]
     },
+    "prefix": "w!",
     "mainLang": "fr",
-    "testGuild": "786321068045500418"
+    "testGuild": "TEST_GUILD_ID"
 }
