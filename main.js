@@ -23,7 +23,7 @@ class Bot extends Client {
         this.config = require('./config.json');//récupérer la config
         this.prefix = 'bot!';
         //on définit notre logger comme ca on a la date dans la console et des couleurs
-        this.logger = new Logger("Shard #"+this.shard.ids);
+        this.logger = new Logger(`Shard #${this.shard?.ids?.toString() ?? "0"}`);
         //regarder aux classes suivantes pour + d'infos
         this.events = new EventsManager(this);
 
