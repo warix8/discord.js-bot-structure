@@ -12,9 +12,6 @@ class Bot extends Client {
         //On passe les options à la classe Client : https://discord.js.org/#/docs/main/stable/class/Client
         //Listes des options : https://discord.js.org/#/docs/main/stable/typedef/ClientOptions
         super({
-            messageCacheMaxSize: 15,
-			messageCacheLifetime: 300,
-			messageSweepInterval: 60,
 			fetchAllMembers: false,
             disableEveryone: true,
             intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_MESSAGES]
