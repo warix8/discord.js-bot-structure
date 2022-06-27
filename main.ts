@@ -1,7 +1,7 @@
 "use strict";
 
 // On récupère des classes ici
-import { Client, Intents, Options, LimitedCollection, VoiceChannel } from "discord.js";
+import { Client, Options, LimitedCollection, VoiceChannel, IntentsBitField, Partials } from "discord.js";
 import CommandsManager from "./src/utils/CommandsManager";
 import EventsManager from "./src/utils/EventsManager.js";
 import Logger from "./src/utils/Logger";
@@ -18,25 +18,27 @@ class Bot extends Client {
         // On passe les options à la classe Client : https://discord.js.org/#/docs/main/stable/class/Client
         // Listes des options : https://discord.js.org/#/docs/main/stable/typedef/ClientOptions
         super({
-            /*messageCacheLifetime: 300,
-            messageSweepInterval: 60,*/
-            intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_MESSAGES],
-            makeCache: Options.cacheWithLimits({
-                MessageManager: {
-                    sweepInterval: 300,
-                    sweepFilter: LimitedCollection.filterByLifetime({
-                        lifetime: 900,
-                        getComparisonTimestamp: e => e?.editedTimestamp ?? e?.createdTimestamp,
-                    })
-                },
-                ThreadManager: {
-                    sweepInterval: 3600,
-                    sweepFilter: LimitedCollection.filterByLifetime({
-                        getComparisonTimestamp: e => e.archiveTimestamp,
-                        excludeFromSweep: e => !e.archived,
-                    }),
-                }
-            }),
+            partials: [
+                Partials.Channel,
+            ],
+            intents: [
+                IntentsBitField.Flags.Guilds,
+                IntentsBitField.Flags.GuildMessages,
+                IntentsBitField.Flags.GuildMembers,
+                IntentsBitField.Flags.GuildBans,
+                IntentsBitField.Flags.GuildMessageReactions,
+                IntentsBitField.Flags.GuildIntegrations,
+                IntentsBitField.Flags.GuildWebhooks,
+                IntentsBitField.Flags.GuildEmojisAndStickers,
+                IntentsBitField.Flags.GuildVoiceStates,
+                IntentsBitField.Flags.DirectMessages,
+                IntentsBitField.Flags.DirectMessageReactions,
+                IntentsBitField.Flags.DirectMessageTyping,
+                IntentsBitField.Flags.GuildScheduledEvents,
+                IntentsBitField.Flags.GuildPresences,
+                IntentsBitField.Flags.GuildMessageTyping,
+                IntentsBitField.Flags.GuildMessages,
+            ],
         });
         this.config = config;// récupérer la config
         // on définit notre logger comme ca on a la date dans la console et des couleurs

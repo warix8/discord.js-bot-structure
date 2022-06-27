@@ -19,7 +19,7 @@ class InteractionCreate extends DiscordEvent {
     }
 
     async run (interaction: Interaction) {
-        if(interaction.isCommand()) await this.commands.handle(interaction);
+        if(interaction.isChatInputCommand()) await this.commands.handle(interaction);
     }
 }
 

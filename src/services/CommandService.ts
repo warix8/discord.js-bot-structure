@@ -16,9 +16,8 @@ class CommandService {
         const guild = interaction.guild;
 
         // Est ce que le bot peut parler ?
-        if(!(interaction.channel instanceof GuildChannel) &&
-        !(interaction.channel instanceof ThreadChannel)) throw new Error("This is not a GuildTextChannel");
-        const channelBotPerms = new Permissions(interaction.channel?.permissionsFor(guild.me));
+        // if(!interaction.channel.isTextBased()) throw new Error("This is not a GuildTextChannel");
+        const channelBotPerms = interaction.channel?.permissionsFor(guild.members.me);
 
         // if (!me.hasPermission("SEND_MESSAGES") || !channelBotPerms.has("SEND_MESSAGES")) return;
 
@@ -36,10 +35,10 @@ class CommandService {
             return interaction.reply(`You must have \`${command.userPerms.join("`, `")}\` permissions to execute this command.`);
         }
 
-        if (!guild.me.permissions.has("EMBED_LINKS") || !channelBotPerms.has("EMBED_LINKS")) return interaction.reply("The bot must have the `EMBED_LINKS` permissions to work properly !");
+        if (!guild.members.me.permissions.has("EmbedLinks") || !channelBotPerms.has("EmbedLinks")) return interaction.reply("The bot must have the `EMBED_LINKS` permissions to work properly !");
 
         // Si le bot manques de permissions
-        if (command.botPerms.length > 0 && !command.botPerms.every(p => guild.me.permissions.has(p) && channelBotPerms.has(p))) {
+        if (command.botPerms.length > 0 && !command.botPerms.every(p => guild.members.me.permissions.has(p) && channelBotPerms.has(p))) {
             return interaction.reply(`The bot must have \`${command.botPerms.join("`, `")}\` permissions to execute this command.`);
         }
 

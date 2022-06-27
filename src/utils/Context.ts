@@ -23,7 +23,7 @@ class Context {
     constructor(client: typeof Client, interaction: CommandInteraction) {
         this.interaction = interaction;
         this.client = client;
-        this.args = interaction.options;
+        this.args = (interaction instanceof CommandInteraction ? interaction.options : null) as CommandInteractionOptionResolver;
         this.lang = client.config.mainLang;
     }
     get shards(): ShardClientUtil {
@@ -36,10 +36,8 @@ class Context {
         return this.interaction.guild;
     }
 
-    get channel (): TextChannel | NewsChannel | ThreadChannel {
-        if(!this.interaction.channel || !this.interaction.guild) throw new Error("Not a guild channel");
-        if(!(this.interaction.channel instanceof GuildChannel) &&
-        !(this.interaction.channel instanceof ThreadChannel)) throw new Error("This is not a GuildTextChannel");
+    get channel (): TextBasedChannel {
+        if(this.interaction.channel.isTextBased()) throw new Error("Not a text channel");
         return this.interaction.channel;
     }
 
@@ -52,7 +50,7 @@ class Context {
     }
 
     get me (): GuildMember {
-        return this.guild.me;
+        return this.guild.members.me;
     }
 
     reply (content: string | MessagePayload | InteractionReplyOptions) {

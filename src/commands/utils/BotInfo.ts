@@ -2,8 +2,6 @@
 
 
 import { Collection } from "discord.js";
-// @ts-ignore
-import humanizeDuration = require("humanize-duration");
 import Command from "../../utils/Command";
 import Context from "../../utils/Context";
 
@@ -20,17 +18,18 @@ class Botinfo extends Command {
 
     async run(ctx: Context){
 
-        const [guilds, users] = await Promise.all<Collection<any, number>, Collection<any, number>>([
-            // @ts-ignore
+        // @ts-ignore
+        const [guilds, users]: [Collection<any, number>, Collection<any, number>]  = await Promise.all([
             ctx.shards.fetchClientValues("guilds.cache.size"),
-            // @ts-ignore
             ctx.shards.fetchClientValues("users.cache.size")
         ]);
+
+        const ram = await ctx.client.shard.broadcastEval(() => (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(1));
 
         ctx.reply({
             embeds: [{
                 thumbnail: {
-                    url: ctx.client.user.displayAvatarURL({ size: 512, dynamic: true })
+                    url: ctx.client.user.displayAvatarURL({ size: 512 })
                 },
                 title: "Bot info",
                 fields: [
@@ -47,7 +46,8 @@ class Botinfo extends Command {
                     },
                     {
                         name: "Ram",
-                        value: "`" + `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB` + "`",
+                        // @ts-ignore
+                        value: "`" + `Heap: ${ram.reduce((acc, memoryUsage) => acc + memoryUsage.heapUsed, 0)}\nRSS: ${ram.reduce((acc, memoryUsage) => acc + memoryUsage.rss, 0)}MB` + "`",
                         inline: true
                     },
                     {
@@ -62,7 +62,7 @@ class Botinfo extends Command {
                     },
                     {
                         name: "Durée de fonctionnement",
-                        value: "`" + humanizeDuration(ctx.client.uptime, { language: "fr" }) + "`"
+                        value: "`" + (ctx.client.uptime/60000).toFixed(2) + "min`"
                     }
 
                 ]
