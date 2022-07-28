@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
     "watch": "tsc --watch",
-    "start": "tsc && node dist/shards.js"
+    "start": "tsc && node dist/shards.js",
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
@@ -26,11 +27,13 @@
   "node": ">=16.6.0",
   "dependencies": {
     "asciiart-logo": "^0.2.6",
-    "discord.js": "^14.0.0-dev.1656158629-c4653f9",
-    "eslint": "^8.20.0"
+    "discord.js": "^14.0.0-dev.1656158629-c4653f9"
   },
   "devDependencies": {
     "@types/node": "^16.4.10",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
     "typescript": "^4.7.4"
   }
 }
