@@ -66,14 +66,16 @@ class CommandsManager {
             return {
                 name: cmd.name,
                 description: cmd.description,
-                options: cmd.options
+                options: cmd.options,
+                defaultMemberPermissions: cmd.userPerms
         }}), this._client.config.testGuild)
 
         await this._globalCommands.set(this._commands.filter(cmd => !cmd.testCmd).map((cmd) => { 
             return {
                 name: cmd.name,
                 description: cmd.description,
-                options: cmd.options
+                options: cmd.options,
+                defaultMemberPermissions: cmd.userPerms
         }}))
 
     }
