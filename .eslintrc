@@ -1,15 +1,26 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": 12
-    },
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
     "rules": {
-        "semi": ["error", "always"],
-        "quotes": ["error", "double"]
+        "object-literal-sort-keys": false,
+        "interface-name": false,
+        "no-empty": 0,
+        "no-console": 0,
+        "radix": 0,
+        "semicolon": true,
+        "no-unused-variable": true,
+        "no-unused-expression": true,
+        "quotemark": true
+    },
+    "scripts": {
+        "lint": "eslint . --ext .ts"
     }
-}
+  }

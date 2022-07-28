@@ -1,5 +1,7 @@
 ### discord.js-bot-structure
 
+[![GitHub Super-Linter](https://github.com/<OWNER>/<REPOSITORY>/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 Cette branche est plus compliqué que les autres, c'est une structure assez complexe pour des bots Discord normalemment assez gros ou multi fonction par ex
 Pour bien utiliser cette structure merci d'essayer de lire tous les fichiers pour être à l'aise par la suite avec la structure
 
