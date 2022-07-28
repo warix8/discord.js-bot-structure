@@ -1,6 +1,7 @@
 "use strict";
 
 import { ShardingManager } from "discord.js";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import logo from "asciiart-logo";
 import Logger from "./src/utils/Logger";

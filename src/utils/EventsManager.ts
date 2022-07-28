@@ -44,6 +44,7 @@ class EventsManager {
                 const stats = await stat(path);
 
                 if (event !== "Event.js" && stats.isFile() && event.endsWith(".js")) {
+                    // eslint-disable-next-line @typescript-eslint/no-var-requires
                     this.addEvent(new(require(path))(this._client));
                 }
             }

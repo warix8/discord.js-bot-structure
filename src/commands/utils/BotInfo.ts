@@ -18,13 +18,12 @@ class Botinfo extends Command {
 
     async run(ctx: Context){
 
-        // @ts-ignore
-        const [guilds, users]: [Collection<any, number>, Collection<any, number>]  = await Promise.all([
+        const [guilds, users] = await Promise.all([
             ctx.shards.fetchClientValues("guilds.cache.size"),
             ctx.shards.fetchClientValues("users.cache.size")
-        ]);
+        ]) as unknown as [Collection<unknown, number>, Collection<unknown, number>];
 
-        const ram = await ctx.client.shard.broadcastEval(() => (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(1));
+        const ram = await ctx.client.shard.broadcastEval(() => (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(1)) as unknown as Collection<unknown, NodeJS.MemoryUsage>;
 
         ctx.reply({
             embeds: [{
@@ -46,7 +45,6 @@ class Botinfo extends Command {
                     },
                     {
                         name: "Ram",
-                        // @ts-ignore
                         value: "`" + `Heap: ${ram.reduce((acc, memoryUsage) => acc + memoryUsage.heapUsed, 0)}\nRSS: ${ram.reduce((acc, memoryUsage) => acc + memoryUsage.rss, 0)}MB` + "`",
                         inline: true
                     },

@@ -11,7 +11,8 @@ abstract class DiscordEvent {
         this.name = name;
     }
 
-    abstract run (...args: any[]) : void;
+    // eslint-disable-next-line no-unused-vars
+    abstract run (...args: unknown[]) : void;
 
 }
 

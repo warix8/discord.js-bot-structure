@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-unused-vars */
 "use strict";
 
 declare global {
     interface Console {
-        success(...args: any): void;
+        success(...args: unknown[]): void;
     }
 }
 
@@ -34,21 +37,33 @@ class Logger {
 
     private _init() {
         for(const [type, color] of Object.entries(this._types) as [LoggerTypes, string][]){
-            this[type] = (...content: any): void => {
+            this[type] = (...content: never[]): void => {
                 this._originalConsole.log("\x1b[40m", this._getDate(), color, `[${this.loggerTitle}]`, ...content, "\x1b[0m");
             };
-            console[type] = (...content: any): void => {
+            console[type] = (...content: never[]): void => {
                 this[type](...content);
             };
         }
     }
 
-    log(...content: any[]): void {}
-    info(...content: any[]): void {}
-    success(...content: any[]): void {}
-    debug(...content: any[]): void {}
-    warn(...content: any[]): void {}
-    error(...content: any[]): void {}
+    log(...content: unknown[]): void {
+        // do nothing.
+    }
+    info(...content: unknown[]): void {
+        // do nothing.
+    }
+    success(...content: unknown[]): void {
+        // do nothing.
+    }
+    debug(...content: unknown[]): void {
+        // do nothing.
+    }
+    warn(...content: unknown[]): void {
+        // do nothing.
+    }
+    error(...content: unknown[]): void {
+        // do nothing.
+    }
 
     private _getDate() {
         return `[${new Date(Date.now()).toLocaleString("FR-fr", { timeZone: "Europe/Paris" })}]`;

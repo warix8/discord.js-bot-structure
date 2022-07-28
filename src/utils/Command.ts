@@ -50,5 +50,6 @@ export default abstract class Command {
         // this.cooldown = info.cooldown || 0; Si vous voulez faire votre système de cooldown ;)
     }
 
+    // eslint-disable-next-line no-unused-vars
     abstract run(ctx: Context): void;
 }

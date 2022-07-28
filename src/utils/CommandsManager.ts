@@ -60,6 +60,7 @@ class CommandsManager {
                             const cmdStats = await stat(cmdPath);
 
                             if (cmdStats.isFile() && command.endsWith(".js")) {
+                                // eslint-disable-next-line @typescript-eslint/no-var-requires
                                 this.addCommand(require(cmdPath));
                             }
                         }

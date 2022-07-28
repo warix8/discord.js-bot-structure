@@ -1,9 +1,7 @@
 "use strict";
 
-import { CommandInteraction, CommandInteractionOptionResolver, Guild, ShardClientUtil, TextChannel,
-    NewsChannel, ThreadChannel, User, GuildMember, InteractionReplyOptions, MessagePayload,
-    InteractionDeferReplyOptions, WebhookEditMessageOptions, TextBasedChannel, GuildChannel
-} from "discord.js";
+import { CommandInteraction, CommandInteractionOptionResolver, Guild, ShardClientUtil, User, GuildMember, InteractionReplyOptions, MessagePayload,
+    InteractionDeferReplyOptions, WebhookEditMessageOptions, TextBasedChannel} from "discord.js";
 import Client from "../../main";
 
 /*
@@ -45,8 +43,8 @@ class Context {
         return this.interaction.user;
     }
 
-    get member (): GuildMember | any {
-        return this.interaction.member;
+    get member(): GuildMember {
+        return this.interaction.member instanceof GuildMember ? this.interaction.member : this.guild.members.cache.get(this.interaction.member.user.id);
     }
 
     get me (): GuildMember {

@@ -65,7 +65,7 @@ class Help extends Command {
                 thumbnail: {
                     url: ctx.client.user.displayAvatarURL({ size: 512 })
                 },
-                description: `Here is the list of my commands.\nExample:\n\`/<command> Execute a command.\`\n\`/help <command> Help of a command.\`\n[Bot Structure](https://github.com/warix8/discord.js-bot-structure#readme)\n`,
+                description: "Here is the list of my commands.\nExample:\n`/<command> Execute a command.`\n`/help <command> Help of a command.`\n[Bot Structure](https://github.com/warix8/discord.js-bot-structure#readme)\n",
                 fields: category.map(x => {
                     return {
                         name: x,
