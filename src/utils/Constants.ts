@@ -1,8 +1,8 @@
 export interface ConfigFile {
-    bot: {
-        token: string,
-        ownersIDs: string[]
-    },
-    mainLang: string,
-    testGuild: string
+	bot: {
+		token: string;
+		ownersIDs: string[];
+	};
+	mainLang: string;
+	testGuild: string;
 }
