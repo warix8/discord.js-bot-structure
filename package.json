@@ -4,11 +4,14 @@
   "description": "An basic discord.js-bot-structure",
   "main": "main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsc --noEmit",
     "compile": "tsc",
     "watch": "tsc --watch",
     "start": "tsc && node dist/shards.js",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --check **/*.ts",
+		"check": "yarn lint && yarn prettier && yarn test",
+		"format": "prettier --write **/*.ts"
   },
   "repository": {
     "type": "git",
