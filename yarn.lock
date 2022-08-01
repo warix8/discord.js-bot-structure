@@ -255,10 +255,10 @@ array-union@^2.1.0:
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-2.1.0.tgz#b798420adbeb1de828d84acd8a2e23d3efe85e8d"
   integrity sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==
 
-asciiart-logo@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/asciiart-logo/-/asciiart-logo-0.2.6.tgz#bcae6e607f0208426be164afc5c71300c4cba244"
-  integrity sha512-qAGPI1Y984SMiONbZ1gI3YdG1bm+mmCj2AklusFqYVVCikPo3jss7IlcZkt+FoRInaomrMn0OQtPaKkt90NApg==
+asciiart-logo@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/asciiart-logo/-/asciiart-logo-0.2.7.tgz#5e94c400a3c661597259efb75031b8cd6ae50d13"
+  integrity sha512-E0E5o1MqmKnBmfWmuWnxhKu9jVdntxy6Q/CcUUXNnYooR7k1cahcyLoRhwb6AlpbKQ70jQfjj3swX20jLN5V5Q==
   dependencies:
     chalk "^2.4.2"
     figlet "^1.2.0"
