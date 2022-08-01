@@ -29,7 +29,7 @@
   ],
   "node": ">=16.6.0",
   "dependencies": {
-    "asciiart-logo": "^0.2.6",
+    "asciiart-logo": "^0.2.7",
     "discord.js": "^14.1.2"
   },
   "devDependencies": {
