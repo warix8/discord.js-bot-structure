@@ -30,7 +30,7 @@
   "node": ">=16.6.0",
   "dependencies": {
     "asciiart-logo": "^0.2.7",
-    "discord.js": "^14.1.2"
+    "discord.js": "^14.7.0"
   },
   "devDependencies": {
     "@types/node": "^18.6.4",
