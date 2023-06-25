@@ -10,7 +10,7 @@ import {
 	InteractionReplyOptions,
 	MessagePayload,
 	InteractionDeferReplyOptions,
-	WebhookEditMessageOptions,
+	WebhookFetchMessageOptions,
 	TextBasedChannel
 } from "discord.js";
 import Client from "../../main";
@@ -78,7 +78,7 @@ class Context {
 		return this.interaction.followUp(content);
 	}
 
-	editReply(content: string | MessagePayload | WebhookEditMessageOptions) {
+	editReply(content: string | MessagePayload | WebhookFetchMessageOptions) {
 		return this.interaction.editReply(content);
 	}
 

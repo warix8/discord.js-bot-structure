@@ -82,7 +82,7 @@ class Help extends Command {
 								.join(", ")
 						};
 					}),
-					timestamp: new Date().toString(),
+					timestamp: new Date().toISOString(),
 					footer: {
 						text: ctx.client.user.username,
 						icon_url: ctx.client.user.avatarURL()
