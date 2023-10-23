@@ -6,7 +6,7 @@ import Client from "../../main";
 import { resolve } from "path";
 import { Collection, ApplicationCommandManager } from "discord.js";
 import { access, readdir, stat } from "fs/promises";
-import Command from "./Command";
+import Command from "../utils/base/Command";
 
 class CommandsManager {
 	private _client: typeof Client;

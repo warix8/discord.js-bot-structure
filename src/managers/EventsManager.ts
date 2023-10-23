@@ -3,7 +3,7 @@
 import type Client from "../../main";
 import { Collection } from "discord.js";
 import { resolve } from "path";
-import type DiscordEvent from "./DiscordEvent";
+import type DiscordEvent from "../utils/base/DiscordEvent";
 
 // ici on gère nos events pour les charger etc.
 

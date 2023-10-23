@@ -13,7 +13,7 @@ import {
 	WebhookFetchMessageOptions,
 	TextBasedChannel
 } from "discord.js";
-import Client from "../../main";
+import Client from "../../../main";
 
 /*
 Ca va paraitre énervent au début mais c'est super utile ! Au lieu de faire à chaque fois dans vos commandes

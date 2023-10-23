@@ -3,7 +3,7 @@
 import type { Interaction } from "discord.js";
 import type Client from "../../main";
 import CommandService from "../services/CommandService";
-import DiscordEvent from "../utils/DiscordEvent";
+import DiscordEvent from "../utils/base/DiscordEvent";
 
 /*
 L'évent interactionCreate n'est pas long car en faites les tâches sont répartis dans le dossier services prenez exemple sur CommandService ;)

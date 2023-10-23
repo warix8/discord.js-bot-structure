@@ -2,7 +2,7 @@
 
 import type Client from "../../main";
 import { CommandInteraction } from "discord.js";
-import Context from "../utils/Context";
+import Context from "../utils/base/Context";
 
 class CommandService {
 	client: typeof Client;

@@ -4,7 +4,7 @@ import { ShardingManager } from "discord.js";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import logo from "asciiart-logo";
-import Logger from "./src/utils/Logger";
+import Logger from "./src/utils/base/Logger";
 import { bot } from "./config.json";
 import * as botPackage from "./package.json";
 

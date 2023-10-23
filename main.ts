@@ -2,11 +2,12 @@
 
 // On récupère des classes ici
 import { Client, IntentsBitField, Partials } from "discord.js";
-import CommandsManager from "./src/utils/CommandsManager";
-import EventsManager from "./src/utils/EventsManager.js";
-import Logger from "./src/utils/Logger";
+import CommandsManager from "./src/managers/CommandsManager";
+import EventsManager from "./src/managers/EventsManager.js";
+import Logger from "./src/utils/base/Logger";
 import * as config from "./config.json";
 import { ConfigFile } from "./src/utils/Constants";
+import "reflect-metadata";
 
 // Création de notre classe Bot qui est la principale et qui est étendu de Client
 class Bot extends Client {

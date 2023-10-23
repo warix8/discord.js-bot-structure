@@ -1,7 +1,7 @@
 "use strict";
 
-import type Context from "../../utils/Context";
-import Command from "../../utils/Command.js";
+import type Context from "../../utils/base/Context";
+import Command from "../../utils/base/Command.js";
 import { ApplicationCommandOptionType } from "discord.js";
 
 class Help extends Command {

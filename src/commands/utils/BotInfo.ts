@@ -1,8 +1,8 @@
 "use strict";
 
 import { Collection } from "discord.js";
-import Command from "../../utils/Command";
-import Context from "../../utils/Context";
+import Command from "../../utils/base/Command";
+import Context from "../../utils/base/Context";
 
 class Botinfo extends Command {
 	constructor() {

@@ -1,6 +1,6 @@
 "use strict";
 
-import type Client from "../../main";
+import type Client from "../../../main";
 
 abstract class DiscordEvent {
 	client: typeof Client;
