@@ -3,6 +3,7 @@
 import type Client from "../../main";
 import { CommandInteraction } from "discord.js";
 import Context from "../utils/base/Context";
+import { defaultGuildSettings } from "../database/models/Guild";
 
 class CommandService {
 	client: typeof Client;
@@ -58,10 +59,24 @@ class CommandService {
 			return interaction.reply("Sorry but this command was temporarly disabled.");
 		}
 
-		const ctx = new Context(this.client, interaction);
+		let guildSettings = await this.client.database.guilds.findOneBy({
+			id: interaction.guildId
+		});
+
+		if (!guildSettings) {
+			await this.client.database.guilds.insert({
+				id: interaction.guildId,
+				...defaultGuildSettings
+			});
+			guildSettings = await this.client.database.guilds.findOneBy({
+				id: interaction.guildId
+			});
+		}
+
+		const ctx = new Context(this.client, interaction, guildSettings);
 
 		try {
-			await command.run(ctx);
+			command.run(ctx);
 			this.client.logger.info(
 				`Command ${command.name} executed by ${ctx.member.user.username} in ${ctx.guild.name}`
 			);

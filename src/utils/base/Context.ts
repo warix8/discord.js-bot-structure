@@ -14,6 +14,7 @@ import {
 	TextBasedChannel
 } from "discord.js";
 import Client from "../../../main";
+import { GuildModel } from "../../database/models/Guild";
 
 /*
 Ca va paraitre énervent au début mais c'est super utile ! Au lieu de faire à chaque fois dans vos commandes
@@ -28,15 +29,18 @@ class Context {
 	client: typeof Client;
 	args: CommandInteractionOptionResolver;
 	lang: string;
+	guildSettings: GuildModel;
 
-	constructor(client: typeof Client, interaction: CommandInteraction) {
+	constructor(client: typeof Client, interaction: CommandInteraction, guildSettings: GuildModel) {
 		this.interaction = interaction;
 		this.client = client;
 		this.args = (
 			interaction instanceof CommandInteraction ? interaction.options : null
 		) as CommandInteractionOptionResolver;
-		this.lang = client.config.mainLang;
+		this.guildSettings = guildSettings;
+		this.lang = guildSettings.lang ?? client.config.mainLang;
 	}
+
 	get shards(): ShardClientUtil {
 		if (!this.client?.shard) throw new Error("Shard non trouvable");
 		return this.client.shard;

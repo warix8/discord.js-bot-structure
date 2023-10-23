@@ -8,6 +8,7 @@ import Logger from "./src/utils/base/Logger";
 import * as config from "./config.json";
 import { ConfigFile } from "./src/utils/Constants";
 import "reflect-metadata";
+import DatabaseManager from "./src/managers/DatabaseManager";
 
 // Création de notre classe Bot qui est la principale et qui est étendu de Client
 class Bot extends Client {
@@ -15,6 +16,7 @@ class Bot extends Client {
 	logger: Logger;
 	events: EventsManager;
 	commands!: CommandsManager;
+	database: DatabaseManager;
 
 	constructor() {
 		// On passe les options à la classe Client : https://discord.js.org/#/docs/main/stable/class/Client
@@ -45,11 +47,12 @@ class Bot extends Client {
 		this.logger = new Logger(`Shard #${this.shard?.ids?.toString() ?? "0"}`);
 		// regarder aux classes suivantes pour + d'infos
 		this.events = new EventsManager(this);
+		this.database = new DatabaseManager(this);
 
 		this.launch()
 			.then(() => {
-				this.commands = new CommandsManager(this);
 				// On load nos commandes
+				this.commands = new CommandsManager(this);
 				this.commands
 					.loadCommands()
 					.then(() => {
@@ -72,6 +75,14 @@ class Bot extends Client {
 		// On load nos events
 		await this.events.loadEvent();
 		this.logger.success(`[Events] Loaded ${this.events.events.size} events`);
+
+		try {
+			await this.database.loadDatabase();
+			this.logger.success("[Database] Successfully connected to database");
+		} catch (error) {
+			this.logger.error(`[Database] Connection error: ${error}`);
+			return process.exit(1);
+		}
 
 		try {
 			await this.login(this.config.bot.token);
