@@ -1,0 +1,8 @@
+{
+  "locale": "fr-FR",
+  "currency": "EUR",
+  "strings": {
+    "Error: {0} doesn't exist.": "Erreur: {0} n'existe pas.",
+    "Deny dangerous permissions for {0}": "Refuser les permissions pour {0}"
+  }
+}

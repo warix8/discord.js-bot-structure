@@ -1,0 +1,13 @@
+{
+  "locale": "en-GB",
+  "currency": "GBP",
+  "strings": {
+    "_note0": "description_help",
+    "_note0_list": {
+      "setprefix": "Change the prefix of the bot or reset the original prefix."
+    },
+    "_note1": "event_message",
+    "My prefix is `{0}` on this server.": "My prefix is `{0}` on this server.",
+    "Error: {0} doesn't exist.": "Error: {0} doesn't exist."
+  }
+}

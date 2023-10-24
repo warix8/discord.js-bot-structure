@@ -31,16 +31,16 @@ class Botinfo extends Command {
 					thumbnail: {
 						url: ctx.client.user.displayAvatarURL({ size: 512 })
 					},
-					title: "Bot info",
+					title: ctx.translate`Bot info`,
 					fields: [
 						{
-							name: "Serveurs",
+							name: ctx.translate`Servers`,
 							value: "`" + guilds.reduce((acc, count) => acc + count, 0) + "`",
 							// value: "`" + guilds.reduce((acc, guild) => acc + count, 0) + "`",
 							inline: true
 						},
 						{
-							name: "Utilisateurs",
+							name: ctx.translate`Users`,
 							value: "`" + users.reduce((acc, count) => acc + count, 0) + "`",
 							inline: true
 						},
@@ -61,12 +61,12 @@ class Botinfo extends Command {
 							inline: true
 						},
 						{
-							name: "Bot Structure",
+							name: ctx.translate`Bot repository`,
 							value: "[Github Source](https://github.com/warix8/discord.js-bot-structure#readme)",
 							inline: true
 						},
 						{
-							name: "Durée de fonctionnement",
+							name: ctx.translate`Uptime`,
 							value: "`" + (ctx.client.uptime / 60000).toFixed(2) + "min`"
 						}
 					]

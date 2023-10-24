@@ -89,6 +89,10 @@ class Context {
 	deleteReply(): Promise<void> {
 		return this.interaction.deleteReply();
 	}
+
+	translate(text: TemplateStringsArray | string[], ...values: unknown[]) {
+		return this.client.I18n.translate(text, ...values);
+	}
 }
 
 export default Context;

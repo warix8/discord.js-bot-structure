@@ -6,6 +6,7 @@ import CommandsManager from "./src/managers/CommandsManager";
 import EventsManager from "./src/managers/EventsManager.js";
 import Logger from "./src/utils/base/Logger";
 import * as config from "./config.json";
+import I18n from "./src/i18n";
 import { ConfigFile } from "./src/utils/Constants";
 import "reflect-metadata";
 import DatabaseManager from "./src/managers/DatabaseManager";
@@ -17,6 +18,7 @@ class Bot extends Client {
 	events: EventsManager;
 	commands!: CommandsManager;
 	database: DatabaseManager;
+	I18n: I18n;
 
 	constructor() {
 		// On passe les options à la classe Client : https://discord.js.org/#/docs/main/stable/class/Client
@@ -27,7 +29,7 @@ class Bot extends Client {
 				IntentsBitField.Flags.Guilds,
 				IntentsBitField.Flags.GuildMessages,
 				IntentsBitField.Flags.GuildMembers,
-				IntentsBitField.Flags.GuildBans,
+				IntentsBitField.Flags.GuildModeration,
 				IntentsBitField.Flags.GuildMessageReactions,
 				IntentsBitField.Flags.GuildIntegrations,
 				IntentsBitField.Flags.GuildWebhooks,
@@ -48,6 +50,7 @@ class Bot extends Client {
 		// regarder aux classes suivantes pour + d'infos
 		this.events = new EventsManager(this);
 		this.database = new DatabaseManager(this);
+		this.I18n = new I18n();
 
 		this.launch()
 			.then(() => {
@@ -83,6 +86,9 @@ class Bot extends Client {
 			this.logger.error(`[Database] Connection error: ${error}`);
 			return process.exit(1);
 		}
+
+		await this.I18n.loader();
+        this.logger.success(`[Langs] Loaded ${this.I18n.availableLangs.length} languages`);
 
 		try {
 			await this.login(this.config.bot.token);

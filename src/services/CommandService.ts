@@ -4,11 +4,13 @@ import type Client from "../../main";
 import { CommandInteraction } from "discord.js";
 import Context from "../utils/base/Context";
 import { defaultGuildSettings } from "../database/models/Guild";
+import Service from "../utils/base/Service";
+import { Emojis } from "../utils/types";
 
-class CommandService {
+class CommandService extends Service {
 	client: typeof Client;
 	constructor(client: typeof Client) {
-		this.client = client;
+		super(client);
 	}
 
 	async handle(interaction: CommandInteraction) {
@@ -21,6 +23,13 @@ class CommandService {
 		const channelBotPerms = interaction.channel?.permissionsFor(guild.members.me);
 
 		// if (!me.hasPermission("SEND_MESSAGES") || !channelBotPerms.has("SEND_MESSAGES")) return;
+
+		if (this._client.uptime < 2000)
+			return interaction.reply({
+				ephemeral: true,
+				content: `${Emojis.ERROR} **${this._client.I18n
+					.translate`Please wait a few seconds while the bot is starting.`}**`
+			});
 
 		const command = this.client.commands.findCommand(interaction.commandName);
 
@@ -72,6 +81,8 @@ class CommandService {
 				id: interaction.guildId
 			});
 		}
+		
+		this._client.I18n.use(guildSettings.lang);
 
 		const ctx = new Context(this.client, interaction, guildSettings);
 
