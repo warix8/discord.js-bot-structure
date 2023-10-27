@@ -21,9 +21,12 @@ class Botinfo extends Command {
 			ctx.shards.fetchClientValues("users.cache.size")
 		])) as unknown as [Collection<unknown, number>, Collection<unknown, number>];
 
-		const ram = (await ctx.client.shard.broadcastEval(() =>
-			(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(1)
-		)) as unknown as Collection<unknown, NodeJS.MemoryUsage>;
+		const ram = (await ctx.client.shard.broadcastEval(() => process.memoryUsage())) as unknown as Collection<
+			unknown,
+			NodeJS.MemoryUsage
+		>;
+
+		console.debug(ram);
 
 		ctx.reply({
 			embeds: [
@@ -48,10 +51,15 @@ class Botinfo extends Command {
 							name: "Ram",
 							value:
 								"`" +
-								`Heap: ${ram.reduce(
-									(acc, memoryUsage) => acc + memoryUsage.heapUsed,
-									0
-								)}\nRSS: ${ram.reduce((acc, memoryUsage) => acc + memoryUsage.rss, 0)}MB` +
+								`Heap: ${(
+									ram.reduce((acc, memoryUsage) => acc + memoryUsage.heapUsed, 0) /
+									1024 /
+									1024
+								).toFixed(1)}MB\nRSS: ${(
+									ram.reduce((acc, memoryUsage) => acc + memoryUsage.rss, 0) /
+									1024 /
+									1024
+								).toFixed(1)}MB` +
 								"`",
 							inline: true
 						},
@@ -61,7 +69,7 @@ class Botinfo extends Command {
 							inline: true
 						},
 						{
-							name: ctx.translate`Bot repository`,
+							name: ctx.translate`Bot structure`,
 							value: "[Github Source](https://github.com/warix8/discord.js-bot-structure#readme)",
 							inline: true
 						},

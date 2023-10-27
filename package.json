@@ -7,11 +7,12 @@
     "test": "tsc --noEmit",
     "compile": "tsc",
     "watch": "tsc --watch",
-    "start": "tsc && node dist/shards.js",
+    "start": "tsc && yarn postbuild && node dist/shards.js",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --check **/*.ts",
     "check": "yarn lint && yarn prettier && yarn test",
-    "format": "prettier --write **/*.ts"
+    "format": "prettier --write **/*.ts",
+    "postbuild": "cpy src/i18n/translations/*.json dist/src/i18n/translations"
   },
   "repository": {
     "type": "git",

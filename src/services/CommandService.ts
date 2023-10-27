@@ -8,7 +8,6 @@ import Service from "../utils/base/Service";
 import { Emojis } from "../utils/types";
 
 class CommandService extends Service {
-	client: typeof Client;
 	constructor(client: typeof Client) {
 		super(client);
 	}
@@ -31,12 +30,12 @@ class CommandService extends Service {
 					.translate`Please wait a few seconds while the bot is starting.`}**`
 			});
 
-		const command = this.client.commands.findCommand(interaction.commandName);
+		const command = this._client.commands.findCommand(interaction.commandName);
 
 		if (!command) return;
 
 		// Si la commande est juste pour les créateurs on l'éxecute pas :(
-		if (command.ownerOnly && !this.client.config.bot.ownersIDs.includes(interaction.user.id)) {
+		if (command.ownerOnly && !this._client.config.bot.ownersIDs.includes(interaction.user.id)) {
 			return interaction.reply("You can't use this command, it's for my creator.");
 		}
 
@@ -64,37 +63,37 @@ class CommandService extends Service {
 		}
 
 		// Si la commande est désactivée
-		if (command.disabled && !this.client.config.bot.ownersIDs.includes(interaction.user.id)) {
+		if (command.disabled && !this._client.config.bot.ownersIDs.includes(interaction.user.id)) {
 			return interaction.reply("Sorry but this command was temporarly disabled.");
 		}
 
-		let guildSettings = await this.client.database.guilds.findOneBy({
+		let guildSettings = await this._client.database.guilds.findOneBy({
 			id: interaction.guildId
 		});
 
 		if (!guildSettings) {
-			await this.client.database.guilds.insert({
+			await this._client.database.guilds.insert({
 				id: interaction.guildId,
 				...defaultGuildSettings
 			});
-			guildSettings = await this.client.database.guilds.findOneBy({
+			guildSettings = await this._client.database.guilds.findOneBy({
 				id: interaction.guildId
 			});
 		}
 		
 		this._client.I18n.use(guildSettings.lang);
 
-		const ctx = new Context(this.client, interaction, guildSettings);
+		const ctx = new Context(this._client, interaction, guildSettings);
 
 		try {
 			command.run(ctx);
-			this.client.logger.info(
+			this._client.logger.info(
 				`Command ${command.name} executed by ${ctx.member.user.username} in ${ctx.guild.name}`
 			);
 		} catch (error) {
 			// faites quelque chose si il y a une erreur sur une commande
 			interaction.reply("Sorry but, an error was occured.");
-			this.client.logger.error(error);
+			this._client.logger.error(error);
 		}
 	}
 }

@@ -2,7 +2,10 @@
   "locale": "fr-FR",
   "currency": "EUR",
   "strings": {
-    "Error: {0} doesn't exist.": "Erreur: {0} n'existe pas.",
-    "Deny dangerous permissions for {0}": "Refuser les permissions pour {0}"
+    "Bot info": "Bot info",
+		"Servers": "Serveurs",
+		"Users": "Utilisateurs",
+		"Bot structure": "Bot structure",
+		"Uptime": "Durée de fonctionnement"
   }
 }
