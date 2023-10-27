@@ -1,7 +1,7 @@
 "use strict";
 
 import type { Interaction } from "discord.js";
-import type Client from "../../main";
+import Bot from "../../main";
 import CommandService from "../services/CommandService";
 import DiscordEvent from "../utils/base/DiscordEvent";
 

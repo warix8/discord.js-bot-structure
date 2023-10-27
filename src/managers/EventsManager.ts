@@ -1,6 +1,6 @@
 "use strict";
 
-import type Client from "../../main";
+import Bot from "../../main";
 import { Collection } from "discord.js";
 import { resolve } from "path";
 import type DiscordEvent from "../utils/base/DiscordEvent";

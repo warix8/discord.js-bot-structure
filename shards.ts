@@ -18,7 +18,7 @@ shardManagerLogger.info("Sharding manager starting !");
 
 const processArgs = process.argv.slice(2);
 
-new ShardingManager(resolve(__dirname, "index"), {
+new ShardingManager(resolve(__dirname, "index.js"), {
 	respawn: true,
 	totalShards:
 		processArgs && parseInt(processArgs[1]) && processArgs[0] === "--shard" ? parseInt(processArgs[1]) : "auto",
