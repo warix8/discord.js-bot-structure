@@ -1,13 +1,13 @@
 import { DataSource, Repository } from "typeorm";
-import Client from "../../main";
+import Bot from "../../main";
 import { GuildModel } from "../database/models/Guild";
 
 class DatabaseManager {
-	private _client: typeof Client;
+	private _client: Bot;
 	dataSource: DataSource;
-    guilds: Repository<GuildModel>;
+	guilds: Repository<GuildModel>;
 
-	constructor(client: typeof Client) {
+	constructor(client: Bot) {
 		this._client = client;
 		this.dataSource = new DataSource({
 			type: "mysql",
@@ -27,7 +27,7 @@ class DatabaseManager {
 	async loadDatabase() {
 		await this.dataSource.initialize(); //Do not catch here - the catch is in main in order to crash the bot if database isn't working
 
-        this.guilds = this.dataSource.getRepository(GuildModel);
+		this.guilds = this.dataSource.getRepository(GuildModel);
 	}
 }
 

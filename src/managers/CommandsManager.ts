@@ -2,18 +2,18 @@
 
 // ici on gère nos commandes pour les charger ou en trouver une avec la fonction findCommand pour une command help
 
-import Client from "../../main";
+import Bot from "../../main";
 import { resolve } from "path";
 import { Collection, ApplicationCommandManager } from "discord.js";
 import { access, readdir, stat } from "fs/promises";
 import Command from "../utils/base/Command";
 
 class CommandsManager {
-	private _client: typeof Client;
+	private _client: Bot;
 	private _commands: Collection<string, Command>;
 	private _path: string;
 	private _globalCommands: ApplicationCommandManager;
-	constructor(client: typeof Client) {
+	constructor(client: Bot) {
 		this._client = client;
 		this._commands = new Collection();
 		this._path = resolve(__dirname, "..", "commands");

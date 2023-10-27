@@ -1,6 +1,6 @@
 "use strict";
 
-import type Client from "../../main";
+import Bot from "../../main";
 import { CommandInteraction } from "discord.js";
 import Context from "../utils/base/Context";
 import { defaultGuildSettings } from "../database/models/Guild";
@@ -8,7 +8,7 @@ import Service from "../utils/base/Service";
 import { Emojis } from "../utils/types";
 
 class CommandService extends Service {
-	constructor(client: typeof Client) {
+	constructor(client: Bot) {
 		super(client);
 	}
 
@@ -80,7 +80,7 @@ class CommandService extends Service {
 				id: interaction.guildId
 			});
 		}
-		
+
 		this._client.I18n.use(guildSettings.lang);
 
 		const ctx = new Context(this._client, interaction, guildSettings);

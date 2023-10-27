@@ -10,11 +10,11 @@ import type DiscordEvent from "../utils/base/DiscordEvent";
 import { access, readdir, stat } from "fs/promises";
 
 class EventsManager {
-	private _client: typeof Client;
+	private _client: Bot;
 	private _events: Collection<string, DiscordEvent>;
 	private _path: string;
 
-	constructor(client: typeof Client) {
+	constructor(client: Bot) {
 		this._client = client;
 		this._events = new Collection();
 		// eslint-disable-next-line no-undef

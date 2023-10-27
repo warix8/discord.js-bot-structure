@@ -11,7 +11,7 @@ L'évent interactionCreate n'est pas long car en faites les tâches sont répart
 
 class InteractionCreate extends DiscordEvent {
 	commands: CommandService;
-	constructor(client: typeof Client) {
+	constructor(client: Bot) {
 		super(client, "interactionCreate");
 		this.client = client;
 		this.commands = new CommandService(this.client);

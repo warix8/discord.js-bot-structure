@@ -13,7 +13,7 @@ import {
 	WebhookFetchMessageOptions,
 	TextBasedChannel
 } from "discord.js";
-import Client from "../../../main";
+import Bot from "../../../main";
 import { GuildModel } from "../../database/models/Guild";
 
 /*
@@ -26,12 +26,12 @@ remplacer aussi ctx.message.channel.send() par ctx.send(); !
 */
 class Context {
 	interaction: CommandInteraction;
-	client: typeof Client;
+	client: Bot;
 	args: CommandInteractionOptionResolver;
 	lang: string;
 	guildSettings: GuildModel;
 
-	constructor(client: typeof Client, interaction: CommandInteraction, guildSettings: GuildModel) {
+	constructor(client: Bot, interaction: CommandInteraction, guildSettings: GuildModel) {
 		this.interaction = interaction;
 		this.client = client;
 		this.args = (
