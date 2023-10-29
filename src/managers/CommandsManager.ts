@@ -43,8 +43,6 @@ class CommandsManager {
 			return;
 		}
 
-		await this._globalCommands.fetch();
-
 		const categorys = await readdir(this._path);
 
 		if (!categorys || categorys.length > 0) {
@@ -62,7 +60,7 @@ class CommandsManager {
 
 							if (cmdStats.isFile() && command.endsWith(".js")) {
 								// eslint-disable-next-line @typescript-eslint/no-var-requires
-								this.addCommand(require(cmdPath));
+								this.addCommand(new (require(cmdPath).default)());
 							}
 						}
 					}
@@ -70,30 +68,34 @@ class CommandsManager {
 			}
 		}
 
-		await this._globalCommands.set(
-			this._commands
-				.filter(cmd => cmd.testCmd)
-				.map(cmd => {
-					return {
-						name: cmd.name,
-						description: cmd.description,
-						options: cmd.options
-					};
-				}),
-			this._client.config.testGuild
-		);
+		if (this._client.cluster.id == 0) {
+			await this._globalCommands.fetch();
 
-		await this._globalCommands.set(
-			this._commands
-				.filter(cmd => !cmd.testCmd)
-				.map(cmd => {
-					return {
-						name: cmd.name,
-						description: cmd.description,
-						options: cmd.options
-					};
-				})
-		);
+			await this._globalCommands.set(
+				this._commands
+					.filter(cmd => cmd.testCmd)
+					.map(cmd => {
+						return {
+							name: cmd.name,
+							description: cmd.description,
+							options: cmd.options
+						};
+					}),
+				this._client.config.testGuild
+			);
+
+			await this._globalCommands.set(
+				this._commands
+					.filter(cmd => !cmd.testCmd)
+					.map(cmd => {
+						return {
+							name: cmd.name,
+							description: cmd.description,
+							options: cmd.options
+						};
+					})
+			);
+		}
 	}
 }
 

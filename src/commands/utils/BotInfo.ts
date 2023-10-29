@@ -17,16 +17,14 @@ class Botinfo extends Command {
 
 	async run(ctx: Context) {
 		const [guilds, users] = (await Promise.all([
-			ctx.shards.fetchClientValues("guilds.cache.size"),
-			ctx.shards.fetchClientValues("users.cache.size")
+			ctx.cluster.fetchClientValues("guilds.cache.size"),
+			ctx.cluster.fetchClientValues("users.cache.size")
 		])) as unknown as [Collection<unknown, number>, Collection<unknown, number>];
 
-		const ram = (await ctx.client.shard.broadcastEval(() => process.memoryUsage())) as unknown as Collection<
+		const ram = (await ctx.client.cluster.broadcastEval(() => process.memoryUsage())) as unknown as Collection<
 			unknown,
 			NodeJS.MemoryUsage
 		>;
-
-		console.debug(ram);
 
 		ctx.reply({
 			embeds: [
@@ -64,8 +62,13 @@ class Botinfo extends Command {
 							inline: true
 						},
 						{
+							name: "Clusters",
+							value: "`" + ctx.cluster.info.CLUSTER_COUNT + "`",
+							inline: true
+						},
+						{
 							name: "Shards",
-							value: "`" + ctx.shards.count + "`",
+							value: "`" + ctx.cluster.info.TOTAL_SHARDS + "`",
 							inline: true
 						},
 						{
@@ -84,4 +87,4 @@ class Botinfo extends Command {
 	}
 }
 
-module.exports = new Botinfo();
+export default Botinfo;

@@ -1,7 +1,7 @@
 {
   "name": "discord.js-bot-structure",
   "version": "1.0.0",
-  "description": "An basic discord.js-bot-structure",
+  "description": "An advanced discord.js-bot-structure",
   "main": "main.ts",
   "scripts": {
     "test": "tsc --noEmit",
@@ -31,7 +31,8 @@
   "node": ">=16.6.0",
   "dependencies": {
     "asciiart-logo": "^0.2.7",
-    "discord.js": "14.13.0",
+    "discord-hybrid-sharding": "^2.1.3",
+    "discord.js": "^14.13.0",
     "mysql2": "^3.6.2",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.17"

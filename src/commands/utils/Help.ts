@@ -93,4 +93,4 @@ class Help extends Command {
 	}
 }
 
-module.exports = new Help();
+export default Help;

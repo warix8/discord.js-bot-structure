@@ -3,6 +3,10 @@
 		"token": "",
 		"ownersIDs": ["OWNER_ID"]
 	},
+	"sharding": {
+		"totalShards": 1,
+		"shardsPerClusters": 1500
+	},
 	"mainLang": "fr",
-	"testGuild": "490839183275982849"
+	"testGuild": ""
 }

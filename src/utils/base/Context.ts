@@ -4,7 +4,6 @@ import {
 	CommandInteraction,
 	CommandInteractionOptionResolver,
 	Guild,
-	ShardClientUtil,
 	User,
 	GuildMember,
 	InteractionReplyOptions,
@@ -41,9 +40,8 @@ class Context {
 		this.lang = guildSettings.lang ?? client.config.mainLang;
 	}
 
-	get shards(): ShardClientUtil {
-		if (!this.client?.shard) throw new Error("Shard non trouvable");
-		return this.client.shard;
+	get cluster() {
+		return this.client.cluster;
 	}
 
 	get guild(): Guild {

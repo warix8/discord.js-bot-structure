@@ -1,37 +1,35 @@
 "use strict";
 
-import { ShardingManager } from "discord.js";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+//@ts-ignore
 import logo from "asciiart-logo";
 import Logger from "./src/utils/base/Logger";
-import { bot } from "./config.json";
+import { bot, sharding } from "./config.json";
 import * as botPackage from "./package.json";
-import { resolve } from "path";
 
 const shardManagerLogger: Logger = new Logger("ShardingManager");
-
-console.debug(botPackage.version);
 
 shardManagerLogger.info(logo(botPackage).render());
 shardManagerLogger.info("Sharding manager starting !");
 
-const processArgs = process.argv.slice(2);
+const startTime = Date.now();
 
-new ShardingManager(resolve(__dirname, "index.js"), {
+
+import { join } from "path";
+import { ClusterManager } from "discord-hybrid-sharding";
+
+const manager = new ClusterManager(join(__dirname, "index.js"), {
+	totalShards: sharding.totalShards,
+	shardsPerClusters: sharding.shardsPerClusters,
 	respawn: true,
-	totalShards:
-		processArgs && parseInt(processArgs[1]) && processArgs[0] === "--shard" ? parseInt(processArgs[1]) : "auto",
-	token: bot.token
-})
-	.on("shardCreate", shard => {
-		shardManagerLogger.info(`Creating Shard #${shard.id}`);
-	})
+	token: bot.token,
+	mode: "process"
+});
+
+manager.on("clusterCreate", cluster => {
+	console.info(`Creating Cluster #${cluster.id} with ${cluster.shardList.length} shards.`);
+});
+
+manager
 	.spawn()
-	.then(() => {
-		shardManagerLogger.success("All shards are launched !");
-	})
-	.catch(err => {
-		shardManagerLogger.error("An error has occurred ! " + err);
-		return process.exit(1);
-	});
+	.then(() => console.info(`The bot has started in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds`));

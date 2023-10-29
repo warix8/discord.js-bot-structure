@@ -1,7 +1,7 @@
 "use strict";
 
 // On récupère des classes ici
-import { Client, IntentsBitField, Partials } from "discord.js";
+import { Client, IntentsBitField, Options, Partials } from "discord.js";
 import CommandsManager from "./src/managers/CommandsManager";
 import EventsManager from "./src/managers/EventsManager.js";
 import Logger from "./src/utils/base/Logger";
@@ -10,6 +10,7 @@ import I18n from "./src/i18n";
 import { ConfigFile } from "./src/utils/Constants";
 import "reflect-metadata";
 import DatabaseManager from "./src/managers/DatabaseManager";
+import { ClusterClient, getInfo } from "discord-hybrid-sharding";
 
 // Création de notre classe Bot qui est la principale et qui est étendu de Client
 class Bot extends Client {
@@ -19,7 +20,8 @@ class Bot extends Client {
 	commands!: CommandsManager;
 	database: DatabaseManager;
 	I18n: I18n;
-
+	cluster: ClusterClient<this>;
+	
 	constructor() {
 		// On passe les options à la classe Client : https://discord.js.org/#/docs/main/stable/class/Client
 		// Listes des options : https://discord.js.org/#/docs/main/stable/typedef/ClientOptions
@@ -42,11 +44,32 @@ class Bot extends Client {
 				IntentsBitField.Flags.GuildPresences,
 				IntentsBitField.Flags.GuildMessageTyping,
 				IntentsBitField.Flags.GuildMessages
-			]
+			],
+			makeCache: Options.cacheWithLimits({
+				...Options.DefaultMakeCacheSettings,
+				ReactionManager: 0,
+				GuildMemberManager: {
+					maxSize: 200,
+					keepOverLimit: member => member.id === this.user.id,
+				}
+			}),
+			sweepers: {
+				messages: {
+					interval: 3600, // Every hour...
+					lifetime: 1800,	// Remove messages older than 30 minutes.
+				},
+				users: {
+					interval: 3600, // Every hour...
+					filter: () => user => user.bot && user.id !== this.user.id, // Remove all bots.
+				}
+			},
+			shards: getInfo().SHARD_LIST, // An array of shards that will get spawned
+			shardCount: getInfo().TOTAL_SHARDS, // Total number of shards
 		});
 		this.config = config; // récupérer la config
 		// on définit notre logger comme ca on a la date dans la console et des couleurs
-		this.logger = new Logger(`Shard #${this.shard?.ids?.toString() ?? "0"}`);
+		this.cluster = new ClusterClient(this);
+		this.logger = new Logger(`Cluster #${this.cluster.id}`);
 		// regarder aux classes suivantes pour + d'infos
 		this.events = new EventsManager(this);
 		this.database = new DatabaseManager(this);
@@ -88,7 +111,7 @@ class Bot extends Client {
 		}
 
 		await this.I18n.loader();
-        this.logger.success(`[Langs] Loaded ${this.I18n.availableLangs.length} languages`);
+		this.logger.success(`[Langs] Loaded ${this.I18n.availableLangs.length} languages`);
 
 		try {
 			await this.login(this.config.bot.token);
