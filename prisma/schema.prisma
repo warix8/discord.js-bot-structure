@@ -6,13 +6,13 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model Guild {
-  id    String     @id
+  id           String   @id
   logs_channel String?
-  addedAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  addedAt      DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

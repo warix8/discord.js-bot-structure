@@ -27,7 +27,6 @@ class EventsManager {
 	addEvent(event: DiscordEvent<keyof ClientEvents>) {
 		this._events.set(event.name.toLowerCase(), event);
 		this._client.on(event.name, event.run.bind(event));
-		delete require.cache[require.resolve(this._path + "\\" + event.name)];
 	}
 
 	async loadEvent() {
@@ -41,12 +40,13 @@ class EventsManager {
 
 		if (events && events.length > 0) {
 			for (const event of events) {
-				const path = resolve(this._path, event);
+				const path = resolve(this._path, "", event);
 				const stats = await stat(path);
 
 				if (event !== "Event.js" && stats.isFile() && event.endsWith(".js")) {
 					// eslint-disable-next-line @typescript-eslint/no-require-imports
 					this.addEvent(new (require(path).default)(this._client));
+					delete require.cache[require.resolve(path)];
 				}
 			}
 		}

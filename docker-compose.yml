@@ -1,0 +1,43 @@
+name: discord-bot-structure
+
+services:
+  bot-structure-database:
+    container_name: bot-structure-database
+    image: mysql:8.0
+    ports:
+      - "6633:3306"
+    hostname: bot-structure-database
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: bot
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - bot-structure
+
+  bot-structure-node:
+    container_name: bot-structure-node
+    depends_on:
+      - bot-structure-database
+    build:
+      context: .
+      dockerfile: docker/bot/Dockerfile
+    volumes:
+      - ./src:/home/node/src
+      - .env:/home/node/.env
+      - ./main.ts:/home/node/main.ts
+      - ./tsconfig.json:/home/node/tsconfig.json
+      - ./package.json:/home/node/package.json
+      # Prisma schema and migrations need to be mounted for your IDE
+      - ./prisma:/home/node/prisma
+      - ./node_modules/.prisma:/home/node/node_modules/.prisma
+    networks:
+      - bot-structure
+
+networks:
+  bot-structure:
+    driver: bridge
+
+volumes:
+  mysql_data:

@@ -8,6 +8,7 @@
     "compile": "tsc",
     "watch": "tsc --watch",
     "start": "tsc && node dist/shards.js",
+    "entrypoint": "npx prisma migrate deploy && npx prisma generate && tsc && node dist/shards.js",
     "dev": "node dist/index.js",
     "lint": "eslint .",
     "prettier": "prettier --check **/*.ts",
