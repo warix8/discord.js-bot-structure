@@ -5,11 +5,14 @@ RUN apt-get update
 RUN mkdir -p /home/node/node_modules && chown -R node:node /home/node
 WORKDIR /home/node
 
-# Copy app source
-COPY --chown=node:node . .
+# Copy package files first
+COPY --chown=node:node package*.json ./
 
 # Switch to node user
 USER node
+
+# Copy app source
+COPY --chown=node:node . .
 
 # Install app dependencies and download translation files
 RUN npm install
