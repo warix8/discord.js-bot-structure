@@ -9,8 +9,8 @@ export default class SetLogsChannel extends Command {
 		super({
 			type: ApplicationCommandType.ChatInput,
 			name: "setlogschannel",
-			category: "utils",
-			description: "Displays the bot informations.",
+			category: "admin",
+			description: "Set the logs channel.",
 			options: [{
 				type: ApplicationCommandOptionType.Channel,
 				name: "channel",

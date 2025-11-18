@@ -10,7 +10,7 @@ export default class Help extends Command {
 			type: ApplicationCommandType.ChatInput,
 			name: "help",
 			category: "utils",
-			description: "Display all the commands of the bot",
+			description: "Display the help of the bot or a command.",
 			options: [
 				{
 					type: ApplicationCommandOptionType.String,
