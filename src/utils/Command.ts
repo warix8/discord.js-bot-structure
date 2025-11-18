@@ -1,7 +1,7 @@
 "use strict";
 
-import { ApplicationCommandOptionData, ApplicationCommandType, ApplicationIntegrationType, BaseApplicationCommandData, ChatInputApplicationCommandData, InteractionContextType, MessageApplicationCommandData, PermissionResolvable, PermissionsBitField, UserApplicationCommandData } from "discord.js";
-import { BaseContext } from "./Context";
+import { ApplicationCommandOptionData, ApplicationCommandType, ApplicationIntegrationType, BaseApplicationCommandData, ChatInputApplicationCommandData, CommandInteraction, InteractionContextType, MessageApplicationCommandData, PermissionResolvable, PermissionsBitField, UserApplicationCommandData } from "discord.js";
+import { BaseContext, CachedGuildContext } from "./Context";
 
 /*
 La classe commandes très utiles surtout utilisez les paramètres ci-dessous pour vous simplifier la vie
@@ -70,7 +70,7 @@ export default abstract class Command {
 	}
 
 	// eslint-disable-next-line no-unused-vars
-	abstract run(ctx: BaseContext): Promise<unknown>;
+	abstract run(ctx: BaseContext<CommandInteraction> | CachedGuildContext<CommandInteraction<"cached">>): Promise<unknown | void>;
 
 	get commandData(): ChatInputApplicationCommandData | MessageApplicationCommandData | UserApplicationCommandData {
 		const base: BaseApplicationCommandData = {
