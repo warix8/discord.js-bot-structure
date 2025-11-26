@@ -179,10 +179,17 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@prisma/client@^6.19.0":
-  version "6.19.0"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-6.19.0.tgz#25d5387cbcf1d92f234f6b07d6a1bb787ed71391"
-  integrity sha512-QXFT+N/bva/QI2qoXmjBzL7D6aliPffIwP+81AdTGq0FXDoLxLkWivGMawG8iM5B9BKfxLIXxfWWAF6wbuJU6g==
+"@prisma/client-runtime-utils@7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@prisma/client-runtime-utils/-/client-runtime-utils-7.0.1.tgz#db5e9e0e48224693e6b89d5d3cd10a1ff1799ba2"
+  integrity sha512-R26BVX9D/iw4toUmZKZf3jniM/9pMGHHdZN5LVP2L7HNiCQKNQQx/9LuMtjepbgRqSqQO3oHN0yzojHLnKTGEw==
+
+"@prisma/client@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-7.0.1.tgz#a48edb13851b1e496e22c4799383560fa85e662c"
+  integrity sha512-O74T6xcfaGAq5gXwCAvfTLvI6fmC3and2g5yLRMkNjri1K8mSpEgclDNuUWs9xj5AwNEMQ88NeD3asI+sovm1g==
+  dependencies:
+    "@prisma/client-runtime-utils" "7.0.1"
 
 "@prisma/config@6.19.0":
   version "6.19.0"
