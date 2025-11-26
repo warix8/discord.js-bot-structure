@@ -31,7 +31,7 @@
   ],
   "node": ">=16.6.0",
   "dependencies": {
-    "@prisma/client": "^6.19.0",
+    "@prisma/client": "^7.0.1",
     "asciiart-logo": "^0.2.7",
     "discord.js": "^14.24.2",
     "dotenv": "^17.2.3"
