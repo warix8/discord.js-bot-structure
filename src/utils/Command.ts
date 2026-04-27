@@ -82,8 +82,8 @@ export default abstract class Command {
 		this.contexts = info.contexts || [InteractionContextType.Guild];
 	}
 
-	// eslint-disable-next-line no-unused-vars
 	abstract run(
+		// eslint-disable-next-line no-unused-vars
 		ctx: BaseContext<CommandInteraction> | CachedGuildContext<CommandInteraction<"cached">>
 	): Promise<unknown | void>;
 
