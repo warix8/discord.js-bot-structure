@@ -52,6 +52,9 @@ jobs:
             - name: Install dependencies
               run: yarn --immutable
 
+            - name: Prisma Generate
+              run: yarn prisma generate
+
             ################################
             # Run Linter against code base #
             ################################
