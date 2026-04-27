@@ -29,7 +29,7 @@
     "Warix",
     "Ota"
   ],
-  "node": ">=16.6.0",
+  "node": ">=22",
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.8.0",
     "@prisma/client": "^7.8.0",
