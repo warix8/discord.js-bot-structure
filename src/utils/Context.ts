@@ -9,11 +9,11 @@ import {
 	InteractionDeferReplyOptions,
 	WebhookFetchMessageOptions,
 	ChatInputCommandInteraction,
-	MessageComponentInteraction} from "discord.js";
+	MessageComponentInteraction
+} from "discord.js";
 import Bot from "../../main";
 import { Guild, Prisma } from "@prisma/client";
 import { prisma } from "./PrismaClient";
-
 
 export class BaseContext<Interaction extends MessageComponentInteraction | CommandInteraction = CommandInteraction> {
 	interaction: Interaction;
@@ -34,12 +34,10 @@ export class BaseContext<Interaction extends MessageComponentInteraction | Comma
 		return this.interaction.user;
 	}
 
-	get args(): Interaction extends ChatInputCommandInteraction
-		? Interaction["options"]
-		: null {
-		return (this.interaction.isChatInputCommand() ? this.interaction.options : null) as Interaction extends ChatInputCommandInteraction
-			? Interaction["options"]
-			: null;
+	get args(): Interaction extends ChatInputCommandInteraction ? Interaction["options"] : null {
+		return (
+			this.interaction.isChatInputCommand() ? this.interaction.options : null
+		) as Interaction extends ChatInputCommandInteraction ? Interaction["options"] : null;
 	}
 
 	reply(content: string | MessagePayload | InteractionReplyOptions) {

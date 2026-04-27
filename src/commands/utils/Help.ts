@@ -1,7 +1,12 @@
 "use strict";
 
 import Command from "../../utils/Command.js";
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction, PermissionsBitField } from "discord.js";
+import {
+	ApplicationCommandOptionType,
+	ApplicationCommandType,
+	ChatInputCommandInteraction,
+	PermissionsBitField
+} from "discord.js";
 import { BaseContext } from "../../utils/Context.js";
 
 export default class Help extends Command {

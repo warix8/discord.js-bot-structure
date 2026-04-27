@@ -1,6 +1,18 @@
 "use strict";
 
-import { ApplicationCommandOptionData, ApplicationCommandType, ApplicationIntegrationType, BaseApplicationCommandData, ChatInputApplicationCommandData, CommandInteraction, InteractionContextType, MessageApplicationCommandData, PermissionResolvable, PermissionsBitField, UserApplicationCommandData } from "discord.js";
+import {
+	ApplicationCommandOptionData,
+	ApplicationCommandType,
+	ApplicationIntegrationType,
+	BaseApplicationCommandData,
+	ChatInputApplicationCommandData,
+	CommandInteraction,
+	InteractionContextType,
+	MessageApplicationCommandData,
+	PermissionResolvable,
+	PermissionsBitField,
+	UserApplicationCommandData
+} from "discord.js";
 import { BaseContext, CachedGuildContext } from "./Context";
 
 /*
@@ -56,7 +68,8 @@ export default abstract class Command {
 		this.descriptionLocalizations = info.descriptionLocalizations || {};
 		this.nameLocalizations = info.nameLocalizations || {};
 
-		this.userPerms = (info.userPerms?.length && info.userPerms.length > 0)? new PermissionsBitField(info.userPerms) : undefined;
+		this.userPerms =
+			info.userPerms?.length && info.userPerms.length > 0 ? new PermissionsBitField(info.userPerms) : undefined;
 		this.botPerms = info.botPerms || [];
 		this.disabled = info.disabled || false;
 		this.ownerOnly = info.ownerOnly || false;
@@ -70,7 +83,9 @@ export default abstract class Command {
 	}
 
 	// eslint-disable-next-line no-unused-vars
-	abstract run(ctx: BaseContext<CommandInteraction> | CachedGuildContext<CommandInteraction<"cached">>): Promise<unknown | void>;
+	abstract run(
+		ctx: BaseContext<CommandInteraction> | CachedGuildContext<CommandInteraction<"cached">>
+	): Promise<unknown | void>;
 
 	get commandData(): ChatInputApplicationCommandData | MessageApplicationCommandData | UserApplicationCommandData {
 		const base: BaseApplicationCommandData = {
@@ -82,7 +97,7 @@ export default abstract class Command {
 		};
 		if (this.userPerms) {
 			Object.assign(base, {
-				defaultMemberPermissions: this.userPerms,
+				defaultMemberPermissions: this.userPerms
 			});
 		}
 		if (this.type === ApplicationCommandType.ChatInput) {
@@ -90,18 +105,17 @@ export default abstract class Command {
 				...base,
 				type: ApplicationCommandType.ChatInput,
 				description: this.description,
-				options: this.options,
-
+				options: this.options
 			};
 		} else if (this.type === ApplicationCommandType.Message) {
 			return {
 				...base,
-				type: ApplicationCommandType.Message,
+				type: ApplicationCommandType.Message
 			};
 		} else {
 			return {
 				...base,
-				type: ApplicationCommandType.User,
+				type: ApplicationCommandType.User
 			};
 		}
 	}

@@ -22,13 +22,12 @@ class CommandService {
 
 		let ctx;
 		if (interaction.inCachedGuild()) {
-
 			const guild = interaction.guild;
 			const channelBotPerms = interaction.channel?.permissionsFor(guild.members.me);
 
 			if (!guild.members.me.permissions.has("EmbedLinks") || !channelBotPerms.has("EmbedLinks"))
 				return interaction.reply("The bot must have the `EMBED_LINKS` permissions to work properly !");
-	
+
 			// Si le bot manques de permissions
 			if (
 				command.botPerms.length > 0 &&
@@ -38,7 +37,7 @@ class CommandService {
 					`The bot must have \`${command.botPerms.join("`, `")}\` permissions to execute this command.`
 				);
 			}
-	
+
 			// Si la commande est désactivée
 			if (command.disabled && !this.client.config.bot.ownersIDs.includes(interaction.user.id)) {
 				return interaction.reply("Sorry but this command is temporarly disabled.");
@@ -51,19 +50,15 @@ class CommandService {
 				create: {
 					id: guild.id
 				},
-				update: {},
+				update: {}
 			});
 
 			ctx = new CachedGuildContext(this.client, interaction, guildSettings);
-
-
 		} else {
 			ctx = new BaseContext(this.client, interaction);
 		}
 
-		this.client.logger.info(
-			`Command ${command.name} executed by ${ctx.author.username}`
-		);
+		this.client.logger.info(`Command ${command.name} executed by ${ctx.author.username}`);
 		await command.run(ctx).catch(error => {
 			if (interaction.replied || interaction.deferred) {
 				interaction.editReply("Sorry but, an error occured.");

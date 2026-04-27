@@ -19,7 +19,7 @@ class Logger {
 	private _originalConsole: Console;
 	constructor(title: string) {
 		this.loggerTitle = title;
-		(this._types = {
+		((this._types = {
 			log: "\x1b[37m",
 			info: "\x1b[34m",
 			success: "\x1b[32m",
@@ -27,7 +27,7 @@ class Logger {
 			warn: "\x1b[33m",
 			error: "\x1b[31m"
 		}),
-			(this._originalConsole = Object.assign({}, console));
+			(this._originalConsole = Object.assign({}, console)));
 		this._init();
 	}
 
