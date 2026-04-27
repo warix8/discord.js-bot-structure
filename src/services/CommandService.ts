@@ -3,7 +3,7 @@
 import Bot from "../../main";
 import { CommandInteraction } from "discord.js";
 import { BaseContext, CachedGuildContext } from "../utils/Context";
-import prisma from "../utils/PrismaClient";
+import { prisma } from "../utils/PrismaClient";
 
 class CommandService {
 	client: Bot;

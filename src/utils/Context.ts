@@ -12,7 +12,7 @@ import {
 	MessageComponentInteraction} from "discord.js";
 import Bot from "../../main";
 import { Guild, Prisma } from "@prisma/client";
-import prisma from "./PrismaClient";
+import { prisma } from "./PrismaClient";
 
 
 export class BaseContext<Interaction extends MessageComponentInteraction | CommandInteraction = CommandInteraction> {
