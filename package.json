@@ -34,7 +34,7 @@
     "@prisma/adapter-better-sqlite3": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "asciiart-logo": "^0.2.7",
-    "discord.js": "^14.24.2",
+    "discord.js": "^14.26.3",
     "dotenv": "^17.2.3"
   },
   "devDependencies": {
